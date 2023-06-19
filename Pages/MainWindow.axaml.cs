@@ -6,12 +6,12 @@ namespace RiskiInsurance;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
-    {
-        InitializeComponent();
+	public MainWindow()
+	{
+		InitializeComponent();
 
 		InputForm.TotalUpdated += UpdateTotal;
-    }
+	}
 
 	void UpdateTotal(int newTotal)
 	{
