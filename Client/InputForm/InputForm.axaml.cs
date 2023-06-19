@@ -10,6 +10,8 @@ public partial class InputForm : UserControl
 	// Total updated event
 	public delegate void TotalUpdatedEventHandler(int newTotal);
 	public event TotalUpdatedEventHandler? TotalUpdated;
+
+	public ClientRecord CurrentRecord;
 	
 	public InputForm()
 	{
@@ -24,7 +26,9 @@ public partial class InputForm : UserControl
 	void CalculateTotal()
 	{
 		// TODO: actual math
-		int total = (int)(TestBox.Value??0);
-		TotalUpdated?.Invoke(total);
+		// int total = (int)(TestBox.Value??0);
+		// TotalUpdated?.Invoke(total);
+
+		CurrentRecord.RiderAge = (byte)(RiderAgeBox.Value??0);
 	}
 }

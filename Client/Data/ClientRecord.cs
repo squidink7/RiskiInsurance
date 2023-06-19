@@ -12,6 +12,6 @@ public struct ClientRecord
 
 	public int CalculateTotal()
 	{
-		
+		return 0;
 	}
 }
