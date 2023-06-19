@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-struct ClientRecord
+public struct ClientRecord
 {
 	public byte RiderAge;
 	public byte RiderExperience; // Clamp between 0 and 5
