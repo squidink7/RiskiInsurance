@@ -2,4 +2,5 @@ Client/bin
 Client/obj
 Client/vs
 
-Server/node_modules
+ServerJS/node_modules
+ServerV/ServerV

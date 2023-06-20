@@ -1,0 +1,8 @@
+<Project>
+	<PropertyGroup>
+		<RestoreSources>
+			https://pkgs.dev.azure.com/AvaloniaUI/AvaloniaUI/_packaging/avalonia-nightly/nuget/v3/index.json;
+			https://api.nuget.org/v3/index.json;
+		</RestoreSources>
+	</PropertyGroup>
+</Project>

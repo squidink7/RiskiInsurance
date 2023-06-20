@@ -1,5 +1,7 @@
 using System.Text.Json;
 
+namespace RiskiInsurance;
+
 public struct ClientRecord
 {
 	public byte RiderAge;

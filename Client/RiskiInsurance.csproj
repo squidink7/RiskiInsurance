@@ -5,6 +5,19 @@
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+
+	<PublishAot>true</PublishAot>
+	<StripSymbols>true</StripSymbols>
+
+	<DebuggerSupport>false</DebuggerSupport>
+	<InvariantGlobalization>true</InvariantGlobalization>
+	<IlcOptimizationPreference>Size</IlcOptimizationPreference>
+	<IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+	<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+	<IlcGenerateCompleteTypeMetadata>false</IlcGenerateCompleteTypeMetadata>
+	<IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
+	<EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+	<EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
   </PropertyGroup>
 
   <ItemGroup>

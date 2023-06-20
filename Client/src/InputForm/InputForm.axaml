@@ -7,7 +7,7 @@
 		>
 	
 	<ScrollViewer>
-		<Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Margin="10" >
+		<Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="10" >
 		
 			<!-- public byte RiderAge;
 				 public byte RiderExperience; // Clamp between 0 and 5

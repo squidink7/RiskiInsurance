@@ -23,12 +23,15 @@ public partial class InputForm : UserControl
 	void TextFieldUpdated(object s, TextChangedEventArgs e) => CalculateTotal();
 	void NumberFieldUpdated(object s, NumericUpDownValueChangedEventArgs e) => CalculateTotal();
 
-	void CalculateTotal()
+	async void CalculateTotal()
 	{
 		// TODO: actual math
 		// int total = (int)(TestBox.Value??0);
 		// TotalUpdated?.Invoke(total);
 
-		CurrentRecord.RiderAge = (byte)(RiderAgeBox.Value??0);
+		CurrentRecord.RiderAge = (byte)(RiderAgeBox.Value ?? 0);
+		CurrentRecord.RiderExperience = (byte)(RiderExperienceBox.Value ?? 0);
+
+		Console.WriteLine(await NetworkClient.AddRecord(CurrentRecord));
 	}
 }
