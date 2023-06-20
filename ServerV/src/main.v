@@ -1,8 +1,8 @@
-module main
-
 import os
 import vweb
 import x.json2
+
+const port = 3000
 
 struct Server {
 	vweb.Context
@@ -11,8 +11,9 @@ struct Server {
 // Create and run server
 fn main() {
 	srv := &Server {}
+	println('Server started on port ${port}!')
 
-	vweb.run_at(srv, port: 3000, nr_workers: 1) or {
+	vweb.run_at(srv, port: port, nr_workers: 1, show_startup_message: false) or {
 		eprintln('Failed to start server: ${err.msg()}')
 		exit(1)
 	}
@@ -27,8 +28,7 @@ pub fn (mut s Server) add_record() vweb.Result {
 }
 
 fn write_record(json string) ! {
-	records_data := os.read_file('../Server/records.json')!
-	mut records := (json2.raw_decode(records_data)!).arr()
+	mut records := json2.raw_decode(os.read_file('../Server/records.json')!)!.arr()
 	records << json2.raw_decode(json)!
 	os.write_file('../Server/records.json', json2.encode(records))!
 }

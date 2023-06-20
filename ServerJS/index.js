@@ -8,10 +8,10 @@ const port = 3000;
 
 // Maybe we could use a database?
 app.post('/addrecord', (req, res) => {
-    let record = req.body.Record;
-    let records = fs.readFileSync('records.json');
+    let record = JSON.parse(req.body);
+    let records = JSON.parse(fs.readFileSync('records.json'));
     records.push(record);
-    fs.writeFile('records.json',JSON.stringify(records));
+    fs.writeFileSync('records.json', JSON.stringify(records));
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Server started on port ${port}!`));
