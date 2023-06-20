@@ -7,17 +7,18 @@
         x:Class="RiskiInsurance.MainWindow"
         Title="RiskiInsurance"
 		Width="600"
-		Height="400">
+		Height="450">
 	
-    <Grid RowDefinitions="Auto,*" Margin="10" >
+    <Grid RowDefinitions="Auto,*,Auto" Margin="10" >
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
 			<TextBlock Text="Total: $" Classes="Title Center" />
 			<TextBlock Name="TotalLabel" Text="0" Classes="Title Center" />
 		</StackPanel>
 
 		<app:InputForm Name="InputForm" Grid.Row="1" />
-	</Grid>
 
+		<Button Content="Submit" Click="SubmitRecord" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="10" />
+	</Grid>
 
 	<Window.Styles>
 		<Style Selector="TextBlock.Title">

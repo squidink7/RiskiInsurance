@@ -17,4 +17,12 @@ public partial class MainWindow : Window
 	{
 		TotalLabel.Text = newTotal.ToString();
 	}
+
+	async void SubmitRecord(object s, RoutedEventArgs e)
+	{
+		InputForm.IsEnabled = false;
+		var success = await NetworkClient.AddRecord(InputForm.CurrentRecord);
+		Console.WriteLine(success);
+		InputForm.IsEnabled = true;
+	}
 }

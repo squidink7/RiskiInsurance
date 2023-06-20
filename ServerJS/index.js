@@ -9,9 +9,9 @@ const port = 3000;
 // Maybe we could use a database?
 app.post('/addrecord', (req, res) => {
     let record = JSON.parse(req.body);
-    let records = JSON.parse(fs.readFileSync('records.json'));
+    let records = JSON.parse(fs.readFileSync('../Server/records.json'));
     records.push(record);
-    fs.writeFileSync('records.json', JSON.stringify(records));
+    fs.writeFileSync('../Server/records.json', JSON.stringify(records));
 });
 
 app.listen(port, () => console.log(`Server started on port ${port}!`));

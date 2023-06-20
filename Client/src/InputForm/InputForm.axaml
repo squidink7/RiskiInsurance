@@ -8,35 +8,27 @@
 	
 	<ScrollViewer>
 		<Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="10" >
-		
-			<!-- public byte RiderAge;
-				 public byte RiderExperience; // Clamp between 0 and 5
-				 public byte SkiPower; // Must be under 200
-				 public byte SkiSeats; // 1, 2, or 3
-				 public int SkiPrice;
-				 public byte SkiAge;
-				 public short Excess; -->
 			
 			<TextBlock Text="Rider Age" />
-			<NumericUpDown Name="RiderAgeBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" />
+			<NumericUpDown Name="RiderAgeBox" ValueChanged="NumberFieldUpdated" Minimum="16" Maximum="60" Grid.Column="1" />
 
 			<TextBlock Text="Rider Experience" Grid.Row="1" />
-			<NumericUpDown Name="RiderExperienceBox" Grid.Column="1" Grid.Row="1" />
+			<NumericUpDown Name="RiderExperienceBox" ValueChanged="NumberFieldUpdated" Maximum="5" Grid.Column="1" Grid.Row="1" />
 
-			<TextBlock Text="Ski Power" Grid.Row="2" />
-			<NumericUpDown Name="SkiPowerBox" Grid.Column="1" Grid.Row="2" />
+			<TextBlock Text="Ski Power (kw/h)" Grid.Row="2" />
+			<NumericUpDown Name="SkiPowerBox" ValueChanged="NumberFieldUpdated" Maximum="200" Grid.Column="1" Grid.Row="2" />
 			
 			<TextBlock Text="Ski Seats" Grid.Row="3" />
-			<NumericUpDown Name="SkiSeatsBox" Grid.Column="1" Grid.Row="3" />
+			<NumericUpDown Name="SkiSeatsBox" ValueChanged="NumberFieldUpdated" Minimum="1" Maximum="3" Grid.Column="1" Grid.Row="3" />
 
 			<TextBlock Text="Ski Price" Grid.Row="4" />
-			<NumericUpDown Name="SkiPriceBox" Grid.Column="1" Grid.Row="4" />
+			<NumericUpDown Name="SkiPriceBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="4" />
 
 			<TextBlock Text="Ski Age" Grid.Row="5" />
-			<NumericUpDown Name="SkiAgeBox" Grid.Column="1" Grid.Row="5" />
+			<NumericUpDown Name="SkiAgeBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="5" />
 
 			<TextBlock Text="Excess" Grid.Row="6" />
-			<NumericUpDown Name="ExcessBox" Grid.Column="1" Grid.Row="6" />
+			<NumericUpDown Name="ExcessBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="6" />
 
 		</Grid>
 	</ScrollViewer>
