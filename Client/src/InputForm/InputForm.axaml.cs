@@ -7,10 +7,6 @@ namespace RiskiInsurance;
 
 public partial class InputForm : UserControl
 {
-	// Total updated event
-	public delegate void TotalUpdatedEventHandler(int newTotal);
-	public event TotalUpdatedEventHandler? TotalUpdated;
-
 	public ClientRecord CurrentRecord;
 	
 	public InputForm()
@@ -25,16 +21,25 @@ public partial class InputForm : UserControl
 
 	void CalculateTotal()
 	{
-		CurrentRecord.RiderAge = (byte)(RiderAgeBox.Value ?? 0);
-		CurrentRecord.RiderExperience = (byte)(RiderExperienceBox.Value ?? 0);
-		CurrentRecord.SkiAge = (byte)(SkiAgeBox.Value ?? 0);
-		CurrentRecord.SkiPower = (byte)(SkiPowerBox.Value ?? 0);
-		CurrentRecord.SkiPrice = (int)(SkiPriceBox.Value ?? 0);
-		CurrentRecord.SkiSeats = (byte)(SkiSeatsBox.Value ?? 0);
-		CurrentRecord.Excess = (byte)(ExcessBox.Value ?? 0);
+		CurrentRecord = new ClientRecord
+		{
+			RiderAge = (byte)(RiderAgeBox.Value ?? 0),
+			RiderExperience = (byte)(RiderExperienceBox.Value ?? 0),
+			SkiAge = (byte)(SkiAgeBox.Value ?? 0),
+			SkiPower = (byte)(SkiPowerBox.Value ?? 0),
+			SkiPrice = (int)(SkiPriceBox.Value ?? 0),
+			SkiSeats = (byte)(SkiSeatsBox.Value ?? 0),
+			Excess = (byte)(ExcessBox.Value ?? 0),
+		};
 
-		CurrentRecord.TimeStamp = DateTime.Now;
+		TotalLabel.Text = CurrentRecord.CalculateTotal().ToString();
+	}
 
-		TotalUpdated?.Invoke(CurrentRecord.CalculateTotal());
+	async void SubmitRecord(object s, RoutedEventArgs e)
+	{
+		IsEnabled = false;
+		var success = await NetworkClient.AddRecord(CurrentRecord);
+		Console.WriteLine(success);
+		IsEnabled = true;
 	}
 }

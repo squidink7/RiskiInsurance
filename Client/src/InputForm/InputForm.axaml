@@ -6,34 +6,53 @@
 		x:Class="RiskiInsurance.InputForm"
 		>
 	
-	<ScrollViewer>
-		<Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="10" >
-			
-			<TextBlock Text="Rider Age" />
-			<NumericUpDown Name="RiderAgeBox" ValueChanged="NumberFieldUpdated" Minimum="16" Maximum="60" Grid.Column="1" />
+	<Grid RowDefinitions="Auto,*,Auto" Margin="10" >
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+			<TextBlock Text="Total: $" Classes="Title Center" />
+			<TextBlock Name="TotalLabel" Text="0" Classes="Title Center" />
+		</StackPanel>
 
-			<TextBlock Text="Rider Experience" Grid.Row="1" />
-			<NumericUpDown Name="RiderExperienceBox" ValueChanged="NumberFieldUpdated" Maximum="5" Grid.Column="1" Grid.Row="1" />
+		<ScrollViewer Grid.Row="1" >
+			<Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="10" >
+				
+				<TextBlock Text="Rider Age" />
+				<NumericUpDown Name="RiderAgeBox" ValueChanged="NumberFieldUpdated" Minimum="16" Maximum="60" Grid.Column="1" />
 
-			<TextBlock Text="Ski Power (kw/h)" Grid.Row="2" />
-			<NumericUpDown Name="SkiPowerBox" ValueChanged="NumberFieldUpdated" Maximum="200" Grid.Column="1" Grid.Row="2" />
-			
-			<TextBlock Text="Ski Seats" Grid.Row="3" />
-			<NumericUpDown Name="SkiSeatsBox" ValueChanged="NumberFieldUpdated" Minimum="1" Maximum="3" Grid.Column="1" Grid.Row="3" />
+				<TextBlock Text="Rider Experience" Grid.Row="1" />
+				<NumericUpDown Name="RiderExperienceBox" ValueChanged="NumberFieldUpdated" Maximum="5" Grid.Column="1" Grid.Row="1" />
 
-			<TextBlock Text="Ski Price" Grid.Row="4" />
-			<NumericUpDown Name="SkiPriceBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="4" />
+				<TextBlock Text="Ski Power (kw/h)" Grid.Row="2" />
+				<NumericUpDown Name="SkiPowerBox" ValueChanged="NumberFieldUpdated" Maximum="200" Grid.Column="1" Grid.Row="2" />
+				
+				<TextBlock Text="Ski Seats" Grid.Row="3" />
+				<NumericUpDown Name="SkiSeatsBox" ValueChanged="NumberFieldUpdated" Minimum="1" Maximum="3" Grid.Column="1" Grid.Row="3" />
 
-			<TextBlock Text="Ski Age" Grid.Row="5" />
-			<NumericUpDown Name="SkiAgeBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="5" />
+				<TextBlock Text="Ski Price" Grid.Row="4" />
+				<NumericUpDown Name="SkiPriceBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="4" />
 
-			<TextBlock Text="Excess" Grid.Row="6" />
-			<NumericUpDown Name="ExcessBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="6" />
+				<TextBlock Text="Ski Age" Grid.Row="5" />
+				<NumericUpDown Name="SkiAgeBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="5" />
 
-		</Grid>
-	</ScrollViewer>
+				<TextBlock Text="Excess" Grid.Row="6" />
+				<NumericUpDown Name="ExcessBox" ValueChanged="NumberFieldUpdated" Grid.Column="1" Grid.Row="6" />
+
+			</Grid>
+		</ScrollViewer>
+
+		<Button Content="Submit" Click="SubmitRecord" Grid.Row="3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" CornerRadius="10" />
+	</Grid>
 
 	<UserControl.Styles>
+		<Style Selector="TextBlock.Title">
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="FontSize" Value="32" />
+		</Style>
+
+		<Style Selector="TextBlock.Center">
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+		</Style>
+
 		<Style Selector="TextBlock">
 			<Setter Property="FontSize" Value="16" />
 			<Setter Property="VerticalAlignment" Value="Center" />

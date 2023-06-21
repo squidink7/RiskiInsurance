@@ -5,6 +5,7 @@ namespace RiskiInsurance;
 
 public struct ClientRecord
 {
+	public string ID;
 	public DateTime TimeStamp;
 
 	public byte RiderAge; // Clamp between 16 and 60
@@ -14,6 +15,12 @@ public struct ClientRecord
 	public int SkiPrice;
 	public byte SkiAge;
 	public short Excess;
+
+	public ClientRecord()
+	{
+		ID = new Guid().ToString();
+		TimeStamp = DateTime.Now;
+	}
 
 	public int CalculateTotal()
 	{
@@ -32,7 +39,7 @@ public struct ClientRecord
 
 		// Add 10% for every full $5000 the Jet Ski cost to buy when new. e.g. an $11,000 Jet Ski would add 20%, a $20,000
 		// jet Ski would add 40%, and a $4,999 Jet Ski would not incur any additional cost.
-		price += (decimal)(0.1 * (int)(SkiPrice / 5000.0));
+		price += (decimal)(0.1 * (int)(SkiPrice / 5000.0)) * price;
 
 		//  The quote so far should then be adjusted according to the following table:
 		price *= (decimal)AgeMultiplier(SkiAge);

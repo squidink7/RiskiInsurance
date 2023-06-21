@@ -6,23 +6,24 @@ namespace RiskiInsurance;
 
 public partial class MainWindow : Window
 {
+	static Carousel? ViewHolder;
+	
 	public MainWindow()
 	{
 		InitializeComponent();
 
-		InputForm.TotalUpdated += UpdateTotal;
+		ViewHolder = ViewHolderInstance;
 	}
 
-	void UpdateTotal(int newTotal)
+	public static void SetPage(Page page)
 	{
-		TotalLabel.Text = newTotal.ToString();
+		if (ViewHolder != null)
+			ViewHolder.SelectedIndex = (int)page;
 	}
+}
 
-	async void SubmitRecord(object s, RoutedEventArgs e)
-	{
-		InputForm.IsEnabled = false;
-		var success = await NetworkClient.AddRecord(InputForm.CurrentRecord);
-		Console.WriteLine(success);
-		InputForm.IsEnabled = true;
-	}
+public enum Page
+{
+	HOME,
+	NEWRECORD
 }
