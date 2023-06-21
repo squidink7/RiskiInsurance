@@ -10,6 +10,7 @@
 		Height="450">
 
 	<Carousel Name="ViewHolderInstance" >
+		<app:MainView />
 		<app:InputForm />
 	</Carousel>
 

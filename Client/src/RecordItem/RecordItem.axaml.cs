@@ -17,8 +17,6 @@ public partial class RecordItem : UserControl
 	
 	public RecordItem(ClientRecord record)
 	{
-		
-
 		InitializeComponent();
 	}
 

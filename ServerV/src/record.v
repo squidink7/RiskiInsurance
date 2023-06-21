@@ -12,4 +12,6 @@ pub:
 	ski_price int       [json: 'SkiPrice']
 	ski_age u8          [json: 'SkiAge']
 	excess i16          [json: 'Excess']
+
+	total int           [json: 'Total']
 }

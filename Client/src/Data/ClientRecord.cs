@@ -16,6 +16,8 @@ public struct ClientRecord
 	public byte SkiAge;
 	public short Excess;
 
+	public int Total;
+
 	public ClientRecord()
 	{
 		ID = Guid.NewGuid().ToString();
@@ -56,7 +58,10 @@ public struct ClientRecord
 		// $100, $300 or $500 excess.
 		price += Excess;
 
-		return (int)Math.Round(price);
+		price = Math.Round(price);
+		Total = (int)price;
+		
+		return (int)price;
 	}
 
 	double AgeMultiplier(byte age)

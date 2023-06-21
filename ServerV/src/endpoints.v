@@ -31,7 +31,10 @@ pub fn (mut s Server) delete_record(id string) vweb.Result {
 		}
 	}
 
-	s.write_records()
+	s.write_records() or {
+		eprintln('Error removing record: ${err.msg()}')
+		return s.server_error(500)
+	}
 
 	if deleted {
 		return s.ok('Record deleted')
