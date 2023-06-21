@@ -5,13 +5,11 @@ const fs = require('fs');
 const app = express();
 app.use(bodyParser.text());
 const port = 3000;
+let records = fs.readFileSync('../Server/records.json');
 
+for (let file of fs.readdirSync('./endpoints')) {
+    endpoint = require(`./endpoints/${file}`);
+    app[endpoint.method.toLowerCase()](endpoint.path, endpoint.handler);
+}
 // Maybe we could use a database?
-app.post('/addrecord', (req, res) => {
-    let record = JSON.parse(req.body);
-    let records = JSON.parse(fs.readFileSync('../Server/records.json'));
-    records.push(record);
-    fs.writeFileSync('../Server/records.json', JSON.stringify(records));
-});
-
 app.listen(port, () => console.log(`Server started on port ${port}!`));

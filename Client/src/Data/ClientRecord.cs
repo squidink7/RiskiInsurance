@@ -18,7 +18,7 @@ public struct ClientRecord
 
 	public ClientRecord()
 	{
-		ID = new Guid().ToString();
+		ID = Guid.NewGuid().ToString();
 		TimeStamp = DateTime.Now;
 	}
 

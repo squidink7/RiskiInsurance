@@ -29,7 +29,7 @@ public partial class InputForm : UserControl
 			SkiPower = (byte)(SkiPowerBox.Value ?? 0),
 			SkiPrice = (int)(SkiPriceBox.Value ?? 0),
 			SkiSeats = (byte)(SkiSeatsBox.Value ?? 0),
-			Excess = (byte)(ExcessBox.Value ?? 0),
+			Excess = (short)(ExcessBox.Value ?? 0),
 		};
 
 		TotalLabel.Text = CurrentRecord.CalculateTotal().ToString();
