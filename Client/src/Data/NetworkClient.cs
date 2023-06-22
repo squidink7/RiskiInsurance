@@ -35,10 +35,11 @@ public static class NetworkClient
         HttpResponseMessage message = await GetMessage("records");
         //Convert response to json string if no content use an empty array
         string jsonContent = await message.Content.ReadAsStringAsync() ?? "[]";
-        //Convert jsonConteent to ClientRecord array
-        AvaloniaList<ClientRecord>? Records = JsonSerializer.Deserialize<AvaloniaList<ClientRecord>>(jsonContent);
-        //Because Records is nullable must check that it is not null before returning
-        return Records ?? new AvaloniaList<ClientRecord>();
+		//Convert jsonConteent to ClientRecord array, if the convert returns null a new empty array is made
+		ClientRecord[] RecordsArr = JsonSerializer.Deserialize<ClientRecord[]>(jsonContent) ?? new ClientRecord[0];
+		//Covert from array to avalonia list before returning
+        AvaloniaList<ClientRecord> RecordsList = new AvaloniaList<ClientRecord>(RecordsArr);
+        return RecordsList;
     }
 
 	/// <summary>
