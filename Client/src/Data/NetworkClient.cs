@@ -11,10 +11,24 @@ public static class NetworkClient
 	const string ServerAddress = "http://localhost";
 	const int ServerPort = 3000;
 
+	/// <summary>
+	/// Adds a record to the servers record list
+	/// </summary>
+	/// <param name="record"></param>
+	/// <returns></returns>
 	public async static Task<bool> AddRecord(ClientRecord record) => await SendMessage("addrecord", "POST", record);
 
+	/// <summary>
+	/// Removes a record from the servers record list
+	/// </summary>
+	/// <param name="id"></param>
+	/// <returns></returns>
 	public async static Task<bool> RemoveRecord(string id) => await SendMessage<object>($"deleteRecord?ID={id}", "DELETE", null);
 
+	/// <summary>
+	/// Gets Records from server
+	/// </summary>
+	/// <returns></returns>
     public async static Task<AvaloniaList<ClientRecord>> GetRecords()
     {
         //Request Records from server
@@ -27,7 +41,14 @@ public static class NetworkClient
         return Records ?? new AvaloniaList<ClientRecord>();
     }
 
-
+	/// <summary>
+	/// Send a message to the server with the specified content and method
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="endpoint">the endpoint on the server to send the message to</param>
+	/// <param name="method">the method to use when contacting the server eg. POST</param>
+	/// <param name="content">the body of the message if appliciable</param>
+	/// <returns></returns>
 	private async static Task<bool> SendMessage<T>(string endpoint, string method, T? content)
 	{
 		var client = new HttpClient();
@@ -55,6 +76,11 @@ public static class NetworkClient
 		}
 	}
 
+	/// <summary>
+	/// Sends a get request to the server at a specified endpoint
+	/// </summary>
+	/// <param name="endpoint">The endpoint on the server to send the request</param>
+	/// <returns></returns>
 	private async static Task<HttpResponseMessage> GetMessage(string endpoint)
 	{
 		var client = new HttpClient();
