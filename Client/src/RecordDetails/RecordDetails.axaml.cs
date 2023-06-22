@@ -8,8 +8,19 @@ namespace RiskiInsurance;
 
 public partial class RecordDetails : UserControl
 {
-	public RecordDetails()
+    public string ExitButtonText
+    {
+        get;
+        set;
+    } = "×";
+    public RecordDetails()
+    {
+        DataContext = this;
+        InitializeComponent();
+    }
+    public RecordDetails(ClientRecord record)
 	{
-		InitializeComponent();
+        DataContext = this;
+        InitializeComponent();
 	}
 }

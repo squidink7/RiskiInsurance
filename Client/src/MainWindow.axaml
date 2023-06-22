@@ -12,6 +12,7 @@
 	<Carousel Name="ViewHolderInstance" >
 		<app:MainView />
 		<app:InputForm />
+		<app:RecordsList />
 	</Carousel>
 
 	<Window.Styles>

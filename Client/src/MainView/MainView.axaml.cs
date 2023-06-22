@@ -11,4 +11,13 @@ public partial class MainView : UserControl
 	{
 		InitializeComponent();
 	}
+
+	void OpenAddRecord(object sender, RoutedEventArgs e)
+	{
+		MainWindow.SetPage(Page.NEWRECORD);
+	}
+    void OpenViewRecords(object sender, RoutedEventArgs e)
+    {
+        MainWindow.SetPage(Page.VIEWRECORDS);
+    }
 }

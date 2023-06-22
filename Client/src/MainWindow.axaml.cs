@@ -25,5 +25,6 @@ public partial class MainWindow : Window
 public enum Page
 {
 	HOME,
-	NEWRECORD
+	NEWRECORD,
+    VIEWRECORDS
 }
