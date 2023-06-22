@@ -34,7 +34,7 @@ public static class NetworkClient
         //Request Records from server
         HttpResponseMessage message = await GetMessage("records");
         //Convert response to json string if no content use an empty array
-        string jsonContent = message.Content.ToString() ?? "[]";
+        string jsonContent = await message.Content.ReadAsStringAsync() ?? "[]";
         //Convert jsonConteent to ClientRecord array
         AvaloniaList<ClientRecord>? Records = JsonSerializer.Deserialize<AvaloniaList<ClientRecord>>(jsonContent);
         //Because Records is nullable must check that it is not null before returning
