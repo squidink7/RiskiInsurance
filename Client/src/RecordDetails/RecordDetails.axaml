@@ -9,7 +9,7 @@
 		<Rectangle Fill="#000000" />
 		<Border>
 			<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*, Auto">
-				<Button Grid.Column="1" Content="{Binding	ExitButtonText}"/>
+				<Button Grid.Column="1" Content="{Binding ExitButtonText}"/>
 				<Label Content="Test" Grid.Row="1"/>
 				<Label Content="Test" Grid.Row="2"/>
 				<Label Content="Test" Grid.Row="3"/>

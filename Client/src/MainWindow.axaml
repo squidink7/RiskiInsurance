@@ -7,7 +7,7 @@
 		x:Class="RiskiInsurance.MainWindow"
 		Title="RiskiInsurance"
 		Width="600"
-		Height="450">
+		Height="500">
 
 	<Carousel Name="ViewHolderInstance" >
 		<app:MainView />

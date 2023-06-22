@@ -10,17 +10,20 @@
 		<TextBlock Text="Insurance Management" HorizontalAlignment="Center" FontSize="32" FontWeight="Bold" Margin="10" />
 
 		<StackPanel VerticalAlignment="Center" Grid.Row="1" >
-			<Button Content="Add Record" Margin="10" Click="OpenAddRecord"/>
-			<Button Content="View Records" Margin="10" Click="OpenViewRecords"/>
+			<Button Content="Add Record" Margin="10" Click="OpenAddRecord" />
+			<Button Content="View Records" Margin="10" Click="OpenViewRecords" />
 		</StackPanel>
 
-		<TextBlock Text="(C)opyright RiskiInsurance, 2023" HorizontalAlignment="Center" Grid.Row="2" Foreground="#888888" />
+		<TextBlock Text="© RiskiInsurance, 2023" HorizontalAlignment="Center" Grid.Row="2" Foreground="#888888" />
 	</Grid>
 	
 	<UserControl.Styles>
 		<Style Selector="Button">
 			<Setter Property="HorizontalAlignment" Value="Stretch" />
 			<Setter Property="HorizontalContentAlignment" Value="Center" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
+			<Setter Property="Height" Value="60" />
+			<Setter Property="FontSize" Value="24" />
 		</Style>
 	</UserControl.Styles>
 </UserControl>

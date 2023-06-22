@@ -18,10 +18,19 @@ public partial class RecordItem : UserControl
 	public RecordItem(ClientRecord record)
 	{
 		InitializeComponent();
+
+		SetRecord(record);
+	}
+
+	public void SetRecord(ClientRecord record)
+	{
+		TitleLabel.Text = record.RiderName;
+		TotalLabel.Text = record.Total.ToString();
+		DateLabel.Text = record.TimeStamp.ToString();
 	}
 
 	void ShowDetails(object s, RoutedEventArgs e)
 	{
-
+		
 	}
 }

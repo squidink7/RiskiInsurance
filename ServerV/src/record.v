@@ -5,6 +5,7 @@ pub:
 	id string           [json: 'ID']
 	timestamp time.Time [json: 'TimeStamp']
 
+	rider_name string   [json: 'RiderName']
 	rider_age u8        [json: 'RiderAge']
 	rider_experience u8 [json: 'RiderExperience']
 	ski_power u8        [json: 'SkiPower']

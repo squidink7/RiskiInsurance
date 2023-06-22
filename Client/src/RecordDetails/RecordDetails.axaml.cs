@@ -12,7 +12,7 @@ public partial class RecordDetails : UserControl
     {
         get;
         set;
-    } = "×";
+    } = "ðŸ—™";
     public RecordDetails()
     {
         DataContext = this;

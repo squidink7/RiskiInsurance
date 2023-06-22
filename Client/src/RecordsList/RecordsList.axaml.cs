@@ -13,9 +13,16 @@ public partial class RecordsList : UserControl
 	public RecordsList()
 	{
 		InitializeComponent();
+
+		LoadRecords();
 	}
 
-	public void AddRecord(ClientRecord record)
+	void LoadRecords()
+	{
+
+	}
+
+	void AddRecord(ClientRecord record)
 	{
 		// RecordsListBox.Items.Add();
 	}

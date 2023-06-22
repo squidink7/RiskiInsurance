@@ -8,6 +8,7 @@ public struct ClientRecord
 	public string ID;
 	public DateTime TimeStamp;
 
+	public string RiderName = "";
 	public byte RiderAge; // Clamp between 16 and 60
 	public byte RiderExperience; // Clamp between 0 and 5
 	public byte SkiPower; // Must be under 200
