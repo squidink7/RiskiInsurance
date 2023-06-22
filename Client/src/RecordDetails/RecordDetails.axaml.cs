@@ -13,6 +13,7 @@ public partial class RecordDetails : UserControl
         get;
         set;
     } = "🗙";
+
     public RecordDetails()
     {
         DataContext = this;
@@ -20,6 +21,15 @@ public partial class RecordDetails : UserControl
     }
     public RecordDetails(ClientRecord record)
 	{
+        NameField.Content = record.RiderName;
+        AgeField.Content = record.RiderAge;
+        ExperienceField.Content = record.RiderExperience;
+        SkiPowerField.Content = record.SkiPower;
+        SkiSeatsField.Content = record.SkiSeats;
+        SkiPriceField.Content = record.SkiPrice;
+        SkiAgeField.Content = record.SkiAge;
+        ExcessField.Content = record.Excess;
+
         DataContext = this;
         InitializeComponent();
 	}
