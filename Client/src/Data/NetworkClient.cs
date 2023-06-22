@@ -1,6 +1,8 @@
 using System.Text.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Avalonia.Collections;
+
 
 namespace RiskiInsurance;
 
@@ -13,16 +15,16 @@ public static class NetworkClient
 
 	public async static Task<bool> RemoveRecord(string id) => await SendMessage<object>($"deleteRecord?ID={id}", "DELETE", null);
 
-    public async static Task<ClientRecord[]> GetRecords()
+    public async static Task<AvaloniaList<ClientRecord>> GetRecords()
     {
         //Request Records from server
         HttpResponseMessage message = await GetMessage("records");
         //Convert response to json string if no content use an empty array
         string jsonContent = message.Content.ToString() ?? "[]";
         //Convert jsonConteent to ClientRecord array
-        ClientRecord[]? Records = JsonSerializer.Deserialize<ClientRecord[]>(jsonContent);
+        AvaloniaList<ClientRecord>? Records = JsonSerializer.Deserialize<AvaloniaList<ClientRecord>>(jsonContent);
         //Because Records is nullable must check that it is not null before returning
-        return Records ?? new ClientRecord[0];
+        return Records ?? new AvaloniaList<ClientRecord>();
     }
 
 
