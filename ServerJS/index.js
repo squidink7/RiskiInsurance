@@ -5,7 +5,6 @@ const fs = require('fs');
 const app = express();
 app.use(bodyParser.text());
 const port = 3000;
-let records = fs.readFileSync('../Server/records.json');
 
 for (let file of fs.readdirSync('./endpoints')) {
     endpoint = require(`./endpoints/${file}`);
