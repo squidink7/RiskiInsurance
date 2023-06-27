@@ -10,9 +10,9 @@
 		Height="500">
 
 	<Carousel Name="ViewHolderInstance" >
-		<app:MainView />
-		<app:InputForm />
-		<app:RecordsList />
+		<app:MainView Name="MainViewPage"/>
+		<app:InputForm Name="InputFormPage"/>
+		<app:RecordsList Name="RecordsListPage"/>
 	</Carousel>
 
 	<Window.Styles>

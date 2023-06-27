@@ -13,17 +13,18 @@ public partial class RecordsList : UserControl
 	public RecordsList()
 	{
 		InitializeComponent();
-
 		LoadRecords();
+		MainWindow.ReloadRecords += new EventHandler((sender, e) =>
+		{
+			LoadRecords();
+		});
 	}
 
 	async void LoadRecords()
 	{
 		Records = await NetworkClient.GetRecords();
-		for (int i = 0;i< Records.Count; i++)
-		{
-			RecordsListBox.Children.Add(new RecordItem(Records[i]));
-		}
+		RecordsListBox.Children.Clear();
+		RecordsListBox.Children.AddRange(Records.Select(record => new RecordItem(record)));
 	}
 
 	AvaloniaList<ClientRecord> SortRecords(SortingMode sortType, SortingDirection sortDirection, AvaloniaList<ClientRecord> records)

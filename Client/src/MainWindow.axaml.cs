@@ -7,7 +7,9 @@ namespace RiskiInsurance;
 public partial class MainWindow : Window
 {
 	static Carousel? ViewHolder;
-	
+
+	public static event EventHandler ReloadRecords;
+
 	public MainWindow()
 	{
 		InitializeComponent();
@@ -18,7 +20,13 @@ public partial class MainWindow : Window
 	public static void SetPage(Page page)
 	{
 		if (ViewHolder != null)
+		{
+			if (page == Page.VIEWRECORDS)
+			{
+				MainWindow.ReloadRecords.Invoke(new object(), new EventArgs());
+			}
 			ViewHolder.SelectedIndex = (int)page;
+		}
 	}
 }
 
