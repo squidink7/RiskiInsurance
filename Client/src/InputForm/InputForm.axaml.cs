@@ -54,7 +54,6 @@ public partial class InputForm : UserControl
 	{
 		IsEnabled = false;
 		var success = await NetworkClient.AddRecord(CurrentRecord);
-		Console.WriteLine(success);
 		IsEnabled = true;
 	}
 

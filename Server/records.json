@@ -1,46 +1,15 @@
 [
     {
-        "ID": "00000000-0000-0000-0000-000000000000",
-        "TimeStamp": "2023-06-21T11:43:20.2102294+09:30",
-        "RiderAge": 34,
-        "RiderExperience": 2,
-        "SkiPower": 23,
-        "SkiSeats": 3,
-        "SkiPrice": 2300,
-        "SkiAge": 21,
-        "Excess": 1000
-    },
-    {
-        "ID": "70b8aea5-d2ee-4db4-80f8-557ecac0d2e4",
-        "TimeStamp": "2023-06-21T12:08:30.5899809+09:30",
-        "RiderAge": 45,
-        "RiderExperience": 3,
-        "SkiPower": 176,
-        "SkiSeats": 3,
-        "SkiPrice": 15000,
-        "SkiAge": 34,
-        "Excess": 1000
-    },
-    {
-        "ID": "70b8aea5-d2ee-4db4-80f8-557ecac0d2e4",
-        "TimeStamp": "2023-06-21T12:08:30.5899809+09:30",
-        "RiderAge": 45,
-        "RiderExperience": 3,
-        "SkiPower": 176,
-        "SkiSeats": 3,
-        "SkiPrice": 15000,
-        "SkiAge": 34,
-        "Excess": 1000
-    },
-    {
-        "ID": "922e7f73-f74d-4184-ae09-82cb8ce8601c",
-        "TimeStamp": "2023-06-21T12:14:41.8619487+09:30",
-        "RiderAge": 34,
-        "RiderExperience": 2,
-        "SkiPower": 32,
-        "SkiSeats": 3,
-        "SkiPrice": 232,
-        "SkiAge": 23,
-        "Excess": 22
+        "ID": "74098a5a-b864-4a0c-befd-b675a3d08617",
+        "TimeStampUnix": 1687833539,
+        "RiderName": "Josh",
+        "RiderAge": 16,
+        "RiderExperience": 0,
+        "SkiPower": 0,
+        "SkiSeats": 1,
+        "SkiPrice": 0,
+        "SkiAge": 0,
+        "Excess": 0,
+        "Total": 375
     }
 ]

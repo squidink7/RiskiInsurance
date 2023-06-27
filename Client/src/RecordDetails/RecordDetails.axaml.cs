@@ -21,6 +21,8 @@ public partial class RecordDetails : UserControl
     }
     public RecordDetails(ClientRecord record)
 	{
+        DataContext = this;
+        InitializeComponent();
         NameField.Content = record.RiderName;
         AgeField.Content = record.RiderAge;
         ExperienceField.Content = record.RiderExperience;
@@ -30,7 +32,5 @@ public partial class RecordDetails : UserControl
         SkiAgeField.Content = record.SkiAge;
         ExcessField.Content = record.Excess;
 
-        DataContext = this;
-        InitializeComponent();
 	}
 }

@@ -2,7 +2,7 @@ using System.Text.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia.Collections;
-
+using System;
 
 namespace RiskiInsurance;
 
@@ -35,10 +35,15 @@ public static class NetworkClient
         HttpResponseMessage message = await GetMessage("records");
         //Convert response to json string if no content use an empty array
         string jsonContent = await message.Content.ReadAsStringAsync() ?? "[]";
-		//Convert jsonConteent to ClientRecord array, if the convert returns null a new empty array is made
-		ClientRecord[] RecordsArr = JsonSerializer.Deserialize<ClientRecord[]>(jsonContent) ?? new ClientRecord[0];
-		//Covert from array to avalonia list before returning
-        AvaloniaList<ClientRecord> RecordsList = new AvaloniaList<ClientRecord>(RecordsArr);
+		//Convert jsonContent to ClientRecord array, if the convert returns null a new empty array is made
+		ClientRecordJsonRecieve[] RecordsArr = JsonSerializer.Deserialize<ClientRecordJsonRecieve[]>(jsonContent) ?? new ClientRecordJsonRecieve[0];
+		//Create the avaloniaList to return
+        AvaloniaList<ClientRecord> RecordsList = new AvaloniaList<ClientRecord>();
+		//Populate the list
+		for (int i = 0; i < RecordsArr.Length; i++)
+		{
+			RecordsList.Add(RecordsArr[i].ToClientRecord());
+		}
         return RecordsList;
     }
 
@@ -54,9 +59,9 @@ public static class NetworkClient
 	{
 		var client = new HttpClient();
 		// Convert object to json
-		var json = content == null ? JsonSerializer.Serialize(content, typeof(T), JsonContext.Default) : "{}";
-		// Post object to server
-		try
+		var json = content == null ? "{}" : JsonSerializer.Serialize(content, typeof(T), JsonContext.Default);
+        // Post object to server
+        try
 		{
 			HttpResponseMessage res = new HttpResponseMessage();
 			switch (method)

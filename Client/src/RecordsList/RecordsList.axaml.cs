@@ -20,7 +20,10 @@ public partial class RecordsList : UserControl
 	async void LoadRecords()
 	{
 		Records = await NetworkClient.GetRecords();
-		//TODO: Display the records here
+		for (int i = 0;i< Records.Count; i++)
+		{
+			RecordsListBox.Children.Add(new RecordItem(Records[i]));
+		}
 	}
 
 	AvaloniaList<ClientRecord> SortRecords(SortingMode sortType, SortingDirection sortDirection, AvaloniaList<ClientRecord> records)
@@ -29,7 +32,7 @@ public partial class RecordsList : UserControl
 		switch (sortType)
 		{
 			case SortingMode.Date:
-				tempArr.OrderByDescending(Record => Record.TimeStamp);
+				tempArr.OrderByDescending(Record => Record.GetTimeStampDateTime());
 				break;
 			case SortingMode.Total:
 				tempArr.OrderByDescending(Record => Record.Total);

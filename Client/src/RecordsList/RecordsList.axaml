@@ -8,7 +8,7 @@
 		>
 	
 	<Panel>
-		<app:RecordDetails IsVisible="true" />
+		<app:RecordDetails IsVisible="false" />
 		<ScrollViewer>
 			<StackPanel Name="RecordsListBox" >
 			</StackPanel>

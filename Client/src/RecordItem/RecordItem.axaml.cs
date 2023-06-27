@@ -26,7 +26,7 @@ public partial class RecordItem : UserControl
 	{
 		TitleLabel.Text = record.RiderName;
 		TotalLabel.Text = record.Total.ToString();
-		DateLabel.Text = record.TimeStamp.ToString();
+		DateLabel.Text = record.GetTimeStampDateTime().ToString();
 	}
 
 	void ShowDetails(object s, RoutedEventArgs e)

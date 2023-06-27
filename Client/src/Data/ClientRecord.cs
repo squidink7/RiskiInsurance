@@ -6,7 +6,7 @@ namespace RiskiInsurance;
 public struct ClientRecord
 {
 	public string ID;
-	public DateTime TimeStamp;
+    public int TimeStampUnix;
 
 	public string RiderName = "";
 	public byte RiderAge; // Clamp between 16 and 60
@@ -19,11 +19,11 @@ public struct ClientRecord
 
 	public int Total;
 
-	public ClientRecord()
+    public ClientRecord()
 	{
 		ID = Guid.NewGuid().ToString();
-		TimeStamp = DateTime.Now;
-	}
+		TimeStampUnix = DateTimeToUnix(DateTime.UtcNow);
+    }
 
 	public int CalculateTotal()
 	{
@@ -74,4 +74,24 @@ public struct ClientRecord
 		else if (age >= 7)             return 0.80;
 		                               return 1.00;
 	}
+
+	/// <summary>
+	/// Returns the Unix Timestamp of the given DateTime
+	/// </summary>
+	/// <param name="dt"></param>
+	private int DateTimeToUnix(DateTime dt)
+	{
+		return (int)((DateTimeOffset)dt).ToUnixTimeSeconds();
+    }
+
+	/// <summary>
+	/// Returns the DateTime that represents the time the Record was created
+	/// </summary>
+	/// <returns></returns>
+    public DateTime GetTimeStampDateTime()
+    {
+        DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+        dateTime = dateTime.AddSeconds(TimeStampUnix).ToLocalTime();
+        return dateTime;
+    }
 }
