@@ -24,13 +24,13 @@ public partial class InputForm : UserControl, IPage
 		CurrentRecord = new ClientRecord
 		{
 			RiderName = RiderNameBox.Text ?? "Unnamed Client",
-			RiderAge = (byte)(RiderAgeBox.Value ?? 0),
-			RiderExperience = (byte)(RiderExperienceBox.Value ?? 0),
-			SkiAge = (byte)(SkiAgeBox.Value ?? 0),
-			SkiPower = (byte)(SkiPowerBox.Value ?? 0),
-			SkiPrice = (int)(SkiPriceBox.Value ?? 0),
-			SkiSeats = (byte)(SkiSeatsBox.Value ?? 0),
-			Excess = (short)(ExcessBox.Value ?? 0),
+			RiderAge = Convert.ToByte(Math.Clamp(RiderAgeBox.Value ?? 0, 0, byte.MaxValue)),
+			RiderExperience = Convert.ToByte(Math.Clamp(RiderExperienceBox.Value ?? 0, 0, byte.MaxValue)),
+			SkiAge = Convert.ToByte(Math.Clamp(SkiAgeBox.Value ?? 0, 0, byte.MaxValue)),
+			SkiPower = Convert.ToByte(Math.Clamp(SkiPowerBox.Value ?? 0, 0, byte.MaxValue)),
+			SkiPrice = Convert.ToInt32(Math.Clamp(SkiPriceBox.Value ?? 0, 0, int.MaxValue)),
+			SkiSeats = Convert.ToByte(Math.Clamp(SkiSeatsBox.Value ?? 0, 0, byte.MaxValue)),
+			Excess = Convert.ToInt16(Math.Clamp(ExcessBox.Value ?? 0, 0, short.MaxValue)),
 		};
 
 		TotalLabel.Text = CurrentRecord.CalculateTotal().ToString();
