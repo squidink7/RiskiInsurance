@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:app="using:RiskiInsurance"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		x:Class="RiskiInsurance.RecordsList" >
+	
+	<Panel>
+		<Grid RowDefinitions="Auto,*,Auto" Margin="10" >
+			<Grid ColumnDefinitions="*,Auto" >
+				<TextBlock Text="All records" FontSize="24" FontWeight="Bold" />
+				
+				<StackPanel Orientation="Horizontal" Grid.Column="1" >
+					<TextBlock Text="Filter: " FontSize="18" VerticalAlignment="Center" />
+					<ComboBox Items="" Grid.Column="1" />
+				</StackPanel>
+			</Grid>
+			
+			<ScrollViewer Grid.Row="1" >
+				<StackPanel Name="RecordsListBox" >
+				</StackPanel>
+			</ScrollViewer>
+
+			<Button Content="Back" Click="BackClicked" Grid.Row="2" CornerRadius="10" />
+		</Grid>
+		<app:RecordDetails Name="DetailsView" IsVisible="false" />
+	</Panel>
+
+</UserControl>

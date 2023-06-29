@@ -1,6 +1,6 @@
-Client/bin
-Client/obj
-Client/.vs
+**/bin
+**/obj
+**/.vs
 
 ServerJS/node_modules
 ServerV/ServerV
