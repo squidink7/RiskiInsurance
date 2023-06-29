@@ -4,26 +4,27 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:app="using:RiskiInsurance"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		x:Class="RiskiInsurance.RecordsList"
-		>
+		x:Class="RiskiInsurance.RecordsList" >
 	
 	<Panel>
+		<Grid RowDefinitions="Auto,*,Auto" Margin="10" >
+			<Grid ColumnDefinitions="*,Auto" >
+				<TextBlock Text="All records" FontSize="24" FontWeight="Bold" />
+				
+				<StackPanel Orientation="Horizontal" Grid.Column="1" >
+					<TextBlock Text="Filter: " FontSize="18" VerticalAlignment="Center" />
+					<ComboBox Items="" Grid.Column="1" />
+				</StackPanel>
+			</Grid>
+			
+			<ScrollViewer Grid.Row="1" >
+				<StackPanel Name="RecordsListBox" >
+				</StackPanel>
+			</ScrollViewer>
+
+			<Button Content="Back" Click="BackClicked" Grid.Row="2" CornerRadius="10" />
+		</Grid>
 		<app:RecordDetails IsVisible="false" />
-		<ScrollViewer>
-			<StackPanel Name="RecordsListBox" >
-			</StackPanel>
-		</ScrollViewer>
 	</Panel>
 
-	<UserControl.Styles>
-		<Style Selector="TextBlock">
-			<Setter Property="FontSize" Value="16" />
-			<Setter Property="VerticalAlignment" Value="Center" />
-			<Setter Property="Margin" Value="0,0,10,0" />
-		</Style>
-
-		<Style Selector="TextBox">
-			<Setter Property="Margin" Value="5" />
-		</Style>
-	</UserControl.Styles>
 </UserControl>

@@ -91,4 +91,9 @@ public partial class RecordsList : UserControl
 		SkiAge,
 		Excees
 	}
+	
+	void BackClicked(object s, RoutedEventArgs e)
+	{
+		MainWindow.SetPage(Page.HOME);
+	}
 }

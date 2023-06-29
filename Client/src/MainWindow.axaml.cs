@@ -8,7 +8,7 @@ public partial class MainWindow : Window
 {
 	static Carousel? ViewHolder;
 
-	public static event EventHandler ReloadRecords;
+	public static event EventHandler? ReloadRecords;
 
 	public MainWindow()
 	{
@@ -23,7 +23,7 @@ public partial class MainWindow : Window
 		{
 			if (page == Page.VIEWRECORDS)
 			{
-				MainWindow.ReloadRecords.Invoke(new object(), new EventArgs());
+				MainWindow.ReloadRecords?.Invoke(new object(), new EventArgs());
 			}
 			ViewHolder.SelectedIndex = (int)page;
 		}

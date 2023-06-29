@@ -23,7 +23,7 @@ public static class NetworkClient
 	/// </summary>
 	/// <param name="id"></param>
 	/// <returns></returns>
-	public async static Task<bool> RemoveRecord(string id) => await SendMessage<object>($"deleteRecord?ID={id}", "DELETE", null);
+	public async static Task<bool> RemoveRecord(string id) => await SendMessage<object?>($"deleteRecord?ID={id}", "DELETE", null);
 
 	/// <summary>
 	/// Gets Records from server
@@ -36,14 +36,17 @@ public static class NetworkClient
         //Convert response to json string if no content use an empty array
         string jsonContent = await message.Content.ReadAsStringAsync() ?? "[]";
 		//Convert jsonContent to ClientRecord array, if the convert returns null a new empty array is made
-		ClientRecordJsonRecieve[] RecordsArr = JsonSerializer.Deserialize<ClientRecordJsonRecieve[]>(jsonContent) ?? new ClientRecordJsonRecieve[0];
-		//Create the avaloniaList to return
-        AvaloniaList<ClientRecord> RecordsList = new AvaloniaList<ClientRecord>();
-		//Populate the list
-		for (int i = 0; i < RecordsArr.Length; i++)
+		ClientRecord[] RecordsArr;
+		try
 		{
-			RecordsList.Add(RecordsArr[i].ToClientRecord());
+			RecordsArr = JsonSerializer.Deserialize<ClientRecord[]>(jsonContent, JsonContext.Default.ClientRecordArray) ?? new ClientRecord[0];
 		}
+		catch
+		{
+			RecordsArr = new ClientRecord[0];
+		}
+		//Create the avaloniaList to return
+        AvaloniaList<ClientRecord> RecordsList = new AvaloniaList<ClientRecord>(RecordsArr);
         return RecordsList;
     }
 
@@ -55,7 +58,7 @@ public static class NetworkClient
 	/// <param name="method">the method to use when contacting the server eg. POST</param>
 	/// <param name="content">the body of the message if appliciable</param>
 	/// <returns></returns>
-	private async static Task<bool> SendMessage<T>(string endpoint, string method, T? content)
+	private async static Task<bool> SendMessage<T>(string endpoint, string method, T content)
 	{
 		var client = new HttpClient();
 		// Convert object to json
@@ -69,6 +72,29 @@ public static class NetworkClient
 				case "POST":
 					res = await client.PostAsync($"{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
 					break;
+				case "DELETE":
+					res = await client.DeleteAsync($"{ServerAddress}:{ServerPort}/{endpoint}");
+					break;
+			}
+			// Check if success
+			return res.IsSuccessStatusCode;
+		}
+		catch (HttpRequestException)
+		{
+			return false;
+		}
+	}
+
+	private async static Task<bool> SendMessage(string endpoint, string method)
+	{
+		var client = new HttpClient();
+		try
+		{
+			HttpResponseMessage res = new HttpResponseMessage();
+			switch (method)
+			{
+				case "POST":
+					throw new NotImplementedException("Cannot POST to server without content");
 				case "DELETE":
 					res = await client.DeleteAsync($"{ServerAddress}:{ServerPort}/{endpoint}");
 					break;

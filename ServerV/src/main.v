@@ -1,4 +1,5 @@
 import vweb
+import x.json2
 
 const port = 3000
 const use_keys = false
@@ -18,6 +19,8 @@ fn main() {
 	srv.load_all() or {
 		eprintln('Failed loading records')
 	}
+
+	println(json2.decode[[]string]('["hi", "hello", "test"]')!)
 
 	println('Server started on port ${port}!')
 

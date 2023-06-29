@@ -11,5 +11,18 @@
         "SkiAge": 0,
         "Excess": 0,
         "Total": 375
+    },
+    {
+        "ID": "16c38952-b93a-4003-b513-722b22c4f3c3",
+        "TimeStampUnix": 1687997049,
+        "RiderName": "Jeff",
+        "RiderAge": 19,
+        "RiderExperience": 1,
+        "SkiPower": 100,
+        "SkiSeats": 2,
+        "SkiPrice": 500,
+        "SkiAge": 2,
+        "Excess": 500,
+        "Total": 845
     }
 ]
