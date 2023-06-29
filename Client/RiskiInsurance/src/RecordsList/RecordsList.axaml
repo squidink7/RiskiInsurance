@@ -4,7 +4,8 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:app="using:RiskiInsurance"
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		x:Class="RiskiInsurance.RecordsList" >
+		x:Class="RiskiInsurance.RecordsList"
+		Background="{DynamicResource SystemRegionBrush}">
 	
 	<Panel>
 		<Grid RowDefinitions="Auto,*,Auto" Margin="10" >
@@ -24,7 +25,7 @@
 
 			<Button Content="Back" Click="BackClicked" Grid.Row="2" CornerRadius="10" />
 		</Grid>
-		<app:RecordDetails Name="DetailsView" IsVisible="false" />
+		<app:RecordDetails Name="DetailsView" RecordUpdated="LoadRecords" IsVisible="false" />
 	</Panel>
 
 </UserControl>

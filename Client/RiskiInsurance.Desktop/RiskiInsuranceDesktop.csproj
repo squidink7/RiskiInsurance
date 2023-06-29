@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<OutputType>WinExe</OutputType>
+	<TargetFramework>net7.0</TargetFramework>
+	<Nullable>enable</Nullable>
+	<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+
+	<PublishAot>true</PublishAot>
+	<StripSymbols>true</StripSymbols>
+
+	<IldDisableReflection>true</IldDisableReflection>
+	<InvariantGlobalization>true</InvariantGlobalization>
+	<IlcOptimizationPreference>Size</IlcOptimizationPreference>
+	<IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+	<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+	<IlcGenerateCompleteTypeMetadata>false</IlcGenerateCompleteTypeMetadata>
+	<IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
+	<EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+	<EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
+  </PropertyGroup>
+
+  <PropertyGroup>
+	<ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Avalonia.Desktop" Version="*-*" />
+	<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+	<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="*-*" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="../RiskiInsurance/RiskiInsurance.csproj" />
+  </ItemGroup>
+</Project>

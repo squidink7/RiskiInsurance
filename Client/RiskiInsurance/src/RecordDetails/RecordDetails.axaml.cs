@@ -8,7 +8,9 @@ namespace RiskiInsurance;
 
 public partial class RecordDetails : UserControl, IPage
 {
-	// public
+	ClientRecord CurrentRecord;
+	public event Action? RecordUpdated;
+
 	public RecordDetails()
 	{
 		DataContext = this;
@@ -24,6 +26,8 @@ public partial class RecordDetails : UserControl, IPage
 
 	public void SetRecord(ClientRecord record)
 	{
+		CurrentRecord = record;
+
 		NameField.Text = record.RiderName.ToString();
         AgeField.Text = record.RiderAge.ToString();
         ExperienceField.Text = record.RiderExperience.ToString();
@@ -41,10 +45,15 @@ public partial class RecordDetails : UserControl, IPage
 
 	void EditRecord(object s, RoutedEventArgs e)
 	{
+		RecordUpdated?.Invoke();
 	}
 
-	void DeleteRecord(object s, RoutedEventArgs e)
+	async void DeleteRecord(object s, RoutedEventArgs e)
 	{
+		IsEnabled = false;
+		await NetworkClient.RemoveRecord(CurrentRecord.ID);
+		RecordUpdated?.Invoke();
 		IsVisible = false;
+		IsEnabled = true;
 	}
 }

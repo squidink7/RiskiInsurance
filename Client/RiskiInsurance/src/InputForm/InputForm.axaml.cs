@@ -53,12 +53,12 @@ public partial class InputForm : UserControl, IPage
 	async void SubmitRecord(object s, RoutedEventArgs e)
 	{
 		IsEnabled = false;
-		var success = await NetworkClient.AddRecord(CurrentRecord);
+		await NetworkClient.AddRecord(CurrentRecord);
 		IsEnabled = true;
 	}
 
 	void BackClicked(object s, RoutedEventArgs e)
 	{
-		AppView.SetPage(Page.HOME);
+		AppView.RemovePage();
 	}
 }

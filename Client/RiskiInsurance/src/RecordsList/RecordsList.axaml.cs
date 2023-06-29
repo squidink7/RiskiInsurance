@@ -97,6 +97,6 @@ public partial class RecordsList : UserControl, IPage
 	
 	void BackClicked(object s, RoutedEventArgs e)
 	{
-		AppView.SetPage(Page.HOME);
+		AppView.RemovePage();
 	}
 }

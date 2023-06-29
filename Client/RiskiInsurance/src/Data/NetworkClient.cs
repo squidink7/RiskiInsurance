@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Avalonia.Collections;
 using System;
+using System.Collections.Generic;
 
 namespace RiskiInsurance;
 
@@ -11,12 +12,42 @@ public static class NetworkClient
 	const string ServerAddress = "http://localhost";
 	const int ServerPort = 3000;
 
+	public static bool Online = false;
+	static List<ClientRecord> RecordsQueue = new();
+
 	/// <summary>
 	/// Adds a record to the servers record list
 	/// </summary>
 	/// <param name="record"></param>
 	/// <returns></returns>
-	public async static Task<bool> AddRecord(ClientRecord record) => await SendMessage("addrecord", "POST", record);
+	public async static Task AddRecord(ClientRecord record)
+	{
+		if (!await SendMessage("addrecord", "POST", record))
+		{
+			// Send failed, add to offline queue
+			RecordsQueue.Add(record);
+		}
+	}
+	
+	// TODO: make an endpoint that returns 204 to query connectivity	
+	public static async Task<bool> Sync()
+	{
+		while (RecordsQueue.Count > 0)
+		{
+			var record = RecordsQueue[0];
+			if (await SendMessage("addrecord", "POST", record))
+			{
+				RecordsQueue.RemoveAt(0);
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		await Task.Delay(1000);
+		return false;
+	}
 
 	/// <summary>
 	/// Removes a record from the servers record list

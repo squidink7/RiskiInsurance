@@ -14,10 +14,10 @@ public partial class MainView : UserControl, IPage
 
 	void OpenAddRecord(object sender, RoutedEventArgs e)
 	{
-		AppView.SetPage(Page.NEWRECORD);
+		AppView.AddPage(new InputForm());
 	}
     void OpenViewRecords(object sender, RoutedEventArgs e)
     {
-        AppView.SetPage(Page.VIEWRECORDS);
+        AppView.AddPage(new RecordsList());
     }
 }

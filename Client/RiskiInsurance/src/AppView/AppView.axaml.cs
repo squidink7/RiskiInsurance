@@ -1,30 +1,65 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Threading;
 
 namespace RiskiInsurance;
 
 public partial class AppView : UserControl
 {
-	static Carousel? ViewHolder;
+	static Panel? ViewHolder;
 
 	public AppView()
 	{
 		InitializeComponent();
 
 		ViewHolder = ViewHolderInstance;
+
+		var networkTimer = new Timer((o) => Dispatcher.UIThread.InvokeAsync(DetectNetwork));
+		networkTimer.Change(0, 10000); // Try to sync with server every 10 seconds (if offline)
 	}
 
-	public static void SetPage(Page page)
+	public static void AddPage(Control page)
 	{
 		if (ViewHolder != null)
 		{
-			ViewHolder.SelectedIndex = (int)page;
+			ViewHolder.Children.Add(page);
+			if (page is IPage ipage) ipage.Show();
+		}
+	}
 
-			if (ViewHolder.SelectedItem is IPage currentPage)
+	public static void RemovePage()
+	{
+		if (ViewHolder != null)
+		{
+			if (ViewHolder.Children.Count >= 1)
 			{
-				currentPage.Show();
+				ViewHolder.Children.RemoveAt(ViewHolder.Children.Count - 1);
 			}
+		}
+	}
+
+	async void DetectNetwork()
+	{
+		if (NetworkClient.Online) return;
+
+		NetworkLabel.Text = "Connecting...";
+		NetworkLabelBorder.Background = new SolidColorBrush(new Color(255, 0, 255, 0));
+		NetworkLabelBorder.Classes.Add("Visible");
+
+		var online = await NetworkClient.Sync();
+
+		if (online)
+		{
+			NetworkLabelBorder.Classes.Remove("Visible");
+		}
+		else
+		{
+			NetworkLabel.Text = "Offline: Records will not be saved!";
+			NetworkLabelBorder.Background = new SolidColorBrush(new Color(255, 255, 0, 0));
 		}
 	}
 }
