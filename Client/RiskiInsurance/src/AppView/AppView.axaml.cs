@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
 
@@ -22,6 +23,12 @@ public partial class AppView : UserControl
 		networkTimer.Change(0, 10000); // Try to sync with server every 10 seconds (if offline)
 	}
 
+	protected override void OnKeyDown(KeyEventArgs e)
+	{
+		if (e.Key == Key.Escape)
+			RemovePage();
+	}
+
 	public static void AddPage(Control page)
 	{
 		if (ViewHolder != null)
@@ -35,7 +42,7 @@ public partial class AppView : UserControl
 	{
 		if (ViewHolder != null)
 		{
-			if (ViewHolder.Children.Count >= 1)
+			if (ViewHolder.Children.Count > 1)
 			{
 				ViewHolder.Children.RemoveAt(ViewHolder.Children.Count - 1);
 			}

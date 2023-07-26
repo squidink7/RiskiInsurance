@@ -14,7 +14,7 @@
 				
 				<StackPanel Orientation="Horizontal" Grid.Column="1" >
 					<TextBlock Text="Filter: " FontSize="18" VerticalAlignment="Center" />
-					<ComboBox Name="SortTypeComboBox" Grid.Column="1" SelectedIndex="0">
+					<ComboBox Name="SortTypeComboBox" Grid.Column="1" SelectedIndex="0" SelectionChanged="SortTypeUpdated" >
 						<ComboBoxItem Content="Date"/>
 						<ComboBoxItem Content="Total"/>
 						<ComboBoxItem Content="RiderAge"/>
@@ -25,7 +25,7 @@
 						<ComboBoxItem Content="SkiAge"/>
 						<ComboBoxItem Content="Excess"/>
 					</ComboBox>
-					<ToggleButton Name="ReverseSortButton" Content="⇅" />
+					<ToggleButton Name="ReverseSortButton" Content="⇅" Click="SortDirectionUpdated" />
 				</StackPanel>
 			</Grid>
 			

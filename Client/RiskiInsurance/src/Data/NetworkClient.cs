@@ -10,15 +10,26 @@ namespace RiskiInsurance;
 public static class NetworkClient
 {
 #if DEBUG
-	const string ServerAddress = "http://localhost";
+	static string ServerAddress = "localhost";
 	const int ServerPort = 6969;
 #else
-	const string ServerAddress = "http://167.86.127.188";
+	static string ServerAddress = "";
 	const int ServerPort = 6969;
 #endif
 
     public static bool Online = false;
 	static List<ClientRecord> RecordsQueue = new();
+
+	static NetworkClient()
+	{
+		ServerAddress = Environment.GetEnvironmentVariable("RISKI_SERVER")??""; // Get server URL from environment
+
+		if (ServerAddress == "")
+		{
+			ServerAddress = "167.86.127.188";
+			// ServerAddress = "riski.fryer.net.au"; // Use Josh's server by default (you're welcome)
+		}
+	}
 
 	/// <summary>
 	/// Returns a boolean representing whether the server is online and can be connected to
@@ -122,10 +133,10 @@ public static class NetworkClient
 			switch (method)
 			{
 				case "POST":
-					res = await client.PostAsync($"{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
+					res = await client.PostAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
 					break;
 				case "DELETE":
-					res = await client.DeleteAsync($"{ServerAddress}:{ServerPort}/{endpoint}");
+					res = await client.DeleteAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}");
 					break;
 			}
 			// Check if success
@@ -147,7 +158,7 @@ public static class NetworkClient
 		var client = new HttpClient();
 		try
 		{
-			var res = await client.GetAsync($"{ServerAddress}:{ServerPort}/{endpoint}");
+			var res = await client.GetAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}");
 			return res;
 		}
 		catch

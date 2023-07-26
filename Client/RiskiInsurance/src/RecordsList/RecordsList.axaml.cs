@@ -13,7 +13,6 @@ public partial class RecordsList : UserControl, IPage
 	public RecordsList()
 	{
 		InitializeComponent();
-		SortTypeComboBox.SelectionChanged += ChangeSortType;
 		LoadRecords();
 	}
 
@@ -27,6 +26,13 @@ public partial class RecordsList : UserControl, IPage
 
 	void UpdateRecordListGUI()
 	{
+		if (SortTypeComboBox == null || ReverseSortButton == null || RecordsListBox == null) return;
+
+		SortingDirection sortingDirection = ReverseSortButton.IsChecked??false ? SortingDirection.Ascending : SortingDirection.Descending;
+		SortingMode sortingMode = (SortingMode)SortTypeComboBox.SelectedIndex;
+
+		Records = SortRecords(sortingMode, sortingDirection, Records);
+
 		RecordsListBox.Children.Clear();
 		RecordsListBox.Children.AddRange(Records.Select((record) => {
 			var item = new RecordItem(record);
@@ -35,16 +41,8 @@ public partial class RecordsList : UserControl, IPage
 		}));
 	}
 
-	void ChangeSortType(object? sender, SelectionChangedEventArgs e)
-	{
-		SortingDirection sortingDirection = ReverseSortButton.IsChecked??false ? SortingDirection.Descending : SortingDirection.Ascending;
-		SortingMode sortingMode = (SortingMode)SortTypeComboBox.SelectedIndex;
-
-		Records = SortRecords(sortingMode, sortingDirection, Records);
-
-        UpdateRecordListGUI();
-	}
-
+	void SortTypeUpdated(object sender, SelectionChangedEventArgs e) => UpdateRecordListGUI();
+	void SortDirectionUpdated(object sender, RoutedEventArgs e) => UpdateRecordListGUI();
 
     AvaloniaList<ClientRecord> SortRecords(SortingMode sortType, SortingDirection sortDirection, AvaloniaList<ClientRecord> records)
 	{

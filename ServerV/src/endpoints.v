@@ -47,7 +47,6 @@ pub fn (mut s Server) delete_record() vweb.Result {
 ['/records'; get]
 pub fn (mut s Server) get_records() vweb.Result {
 	return s.text(json2.encode(s.records()))
-	// return s.text(s.records.str())
 }
 
 ['/testConnection'; get]
