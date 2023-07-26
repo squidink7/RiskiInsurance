@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskiInsuranceAndroid", "RiskiInsurance.Android\RiskiInsuranceAndroid.csproj", "{0B59F2C6-BD22-4FB9-AF4E-895ED4E8D6B5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskiInsurance.Browser", "RiskiInsurance.Browser\RiskiInsurance.Browser.csproj", "{66646656-C90F-467D-81B3-9096AD28774C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskiInsuranceBrowser", "RiskiInsurance.Browser\RiskiInsuranceBrowser.csproj", "{66646656-C90F-467D-81B3-9096AD28774C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiskiInsuranceDesktop", "RiskiInsurance.Desktop\RiskiInsuranceDesktop.csproj", "{500DF788-FB8A-47B6-88DC-30DF9E02BDA6}"
 EndProject
