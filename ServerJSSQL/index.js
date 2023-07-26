@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const app = express();
 app.use(bodyParser.text());
-const port = 3000;
+const port = 6969;
 
 for (let file of fs.readdirSync('./endpoints')) {
     endpoint = require(`./endpoints/${file}`);

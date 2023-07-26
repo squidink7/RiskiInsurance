@@ -9,10 +9,15 @@ namespace RiskiInsurance;
 
 public static class NetworkClient
 {
+#if DEBUG
 	const string ServerAddress = "http://localhost";
-	const int ServerPort = 3000;
+	const int ServerPort = 6969;
+#else
+	const string ServerAddress = "http://167.86.127.188";
+	const int ServerPort = 6969;
+#endif
 
-	public static bool Online = false;
+    public static bool Online = false;
 	static List<ClientRecord> RecordsQueue = new();
 
 	/// <summary>
