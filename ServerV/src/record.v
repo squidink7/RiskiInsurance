@@ -1,9 +1,7 @@
-import time
-
 pub struct Record {
 pub:
 	id string           [json: 'ID']
-	timestamp time.Time [json: 'TimeStamp']
+	timestamp int       [json: 'TimeStampUnix']
 
 	rider_name string   [json: 'RiderName']
 	rider_age u8        [json: 'RiderAge']

@@ -1,6 +1,9 @@
 **/bin
 **/obj
 **/.vs
+**/build
+**.db
+**.AppImage
 
 ServerJS/node_modules
 ServerV/ServerV

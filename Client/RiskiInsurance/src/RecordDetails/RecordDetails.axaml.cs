@@ -51,6 +51,7 @@ public partial class RecordDetails : UserControl, IPage
 	async void DeleteRecord(object s, RoutedEventArgs e)
 	{
 		IsEnabled = false;
+		Console.WriteLine(CurrentRecord.ID);
 		await NetworkClient.RemoveRecord(CurrentRecord.ID);
 		RecordUpdated?.Invoke();
 		IsVisible = false;

@@ -1,26 +1,21 @@
 import vweb
-import x.json2
+import db.sqlite
 
-const port = 3000
+const port = 6969
 const use_keys = false
 
 struct Server {
 	vweb.Context
 	middlewares map[string][]vweb.Middleware
 mut:
-	keys []string
-	records []Record
+	db sqlite.DB
 }
 
 // Create and run server
 fn main() {	
 	mut srv := &Server {}
 
-	srv.load_all() or {
-		eprintln('Failed loading records')
-	}
-
-	println(json2.decode[[]string]('["hi", "hello", "test"]')!)
+	srv.init()!
 
 	println('Server started on port ${port}!')
 
@@ -28,6 +23,8 @@ fn main() {
 		eprintln('Failed to start server: ${err.msg()}')
 		exit(1)
 	}
+
+	srv.db.close()!
 }
 
 pub fn (mut s Server) before_request() {

@@ -37,7 +37,7 @@ public static class NetworkClient
 	/// <returns></returns>
 	public async static Task AddRecord(ClientRecord record)
 	{
-		if (!await SendMessage("addrecord", "POST", record))
+		if (!await SendMessage("addRecord", "POST", record))
 		{
 			// Send failed, add to offline queue
 			RecordsQueue.Add(record);
@@ -56,7 +56,7 @@ public static class NetworkClient
 		while (RecordsQueue.Count > 0)
 		{
 			var record = RecordsQueue[0];
-			if (await SendMessage("addrecord", "POST", record))
+			if (await SendMessage("addRecord", "POST", record))
 			{
 				RecordsQueue.RemoveAt(0);
 			}

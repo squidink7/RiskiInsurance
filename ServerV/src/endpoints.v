@@ -1,14 +1,15 @@
 import vweb
 import x.json2
 
-['/addrecord'; post]
+['/addRecord'; post]
 pub fn (mut s Server) add_record() vweb.Result {
-	s.records << json2.decode[Record](s.req.data) or {
+	println(s.req.data)
+	record := json2.decode[Record](s.req.data) or {
 		eprintln('Error decoding json: ${err.msg()}')
 		return s.server_error(400)
 	}
 	
-	s.write_records() or {
+	s.write_record(record) or {
 		eprintln('Error adding record: ${err.msg()}')
 		return s.server_error(500)
 	}
@@ -16,22 +17,22 @@ pub fn (mut s Server) add_record() vweb.Result {
 	return s.ok('Record added')
 }
 
-['/deleterecord/:id'; delete]
-pub fn (mut s Server) delete_record(id string) vweb.Result {
+['/deleteRecord'; delete]
+pub fn (mut s Server) delete_record() vweb.Result {
+	id := s.query['ID']
 	if id == '' {
 		s.set_status(400, '')
 		return s.text('No id provided')
 	}
 	
 	mut deleted := false
-	for i, r in s.records {
+	for _, r in s.records() {
 		if r.id == id {
-			s.records.delete(i)
 			deleted = true
 		}
 	}
 
-	s.write_records() or {
+	s.remove_record(id) or {
 		eprintln('Error removing record: ${err.msg()}')
 		return s.server_error(500)
 	}
@@ -45,5 +46,11 @@ pub fn (mut s Server) delete_record(id string) vweb.Result {
 
 ['/records'; get]
 pub fn (mut s Server) get_records() vweb.Result {
-	return s.json(json2.encode(s.records))
+	return s.text(json2.encode(s.records()))
+	// return s.text(s.records.str())
+}
+
+['/testConnection'; get]
+pub fn (mut s Server) test_connection() vweb.Result {
+	return s.ok('')
 }

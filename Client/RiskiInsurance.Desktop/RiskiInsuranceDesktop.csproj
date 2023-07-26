@@ -8,6 +8,8 @@
 	<PublishAot>true</PublishAot>
 	<StripSymbols>true</StripSymbols>
 
+	<PublishDir Condition="$(RuntimeIdentifier.StartsWith('linux'))">linux/build</PublishDir>
+
 	<IldDisableReflection>true</IldDisableReflection>
 	<InvariantGlobalization>true</InvariantGlobalization>
 	<IlcOptimizationPreference>Size</IlcOptimizationPreference>

@@ -13,7 +13,7 @@ public partial class RecordsList : UserControl, IPage
 	public RecordsList()
 	{
 		InitializeComponent();
-		SortTypeComboBox.SelectionChanged += new EventHandler<SelectionChangedEventArgs>(ChangeSortType);
+		SortTypeComboBox.SelectionChanged += ChangeSortType;
 		LoadRecords();
 	}
 
@@ -35,13 +35,10 @@ public partial class RecordsList : UserControl, IPage
 		}));
 	}
 
-	void ChangeSortType(object senderObj, SelectionChangedEventArgs e)
+	void ChangeSortType(object? sender, SelectionChangedEventArgs e)
 	{
-		ComboBox sender = (ComboBox)senderObj;
-		if (sender.SelectedItem == null) return;
-		string SelectedContent = ((ComboBoxItem)sender.SelectedItem).Content.ToString();
-		SortingDirection sortingDirection = SortingDirection.Ascending;
-		SortingMode sortingMode = (SortingMode)Enum.Parse(typeof(SortingMode),SelectedContent);
+		SortingDirection sortingDirection = ReverseSortButton.IsChecked??false ? SortingDirection.Descending : SortingDirection.Ascending;
+		SortingMode sortingMode = (SortingMode)SortTypeComboBox.SelectedIndex;
 
 		Records = SortRecords(sortingMode, sortingDirection, Records);
 

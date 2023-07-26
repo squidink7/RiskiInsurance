@@ -25,6 +25,7 @@
 						<ComboBoxItem Content="SkiAge"/>
 						<ComboBoxItem Content="Excess"/>
 					</ComboBox>
+					<ToggleButton Name="ReverseSortButton" Content="⇅" />
 				</StackPanel>
 			</Grid>
 			

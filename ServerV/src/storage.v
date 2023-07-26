@@ -1,22 +1,31 @@
-import os
-import x.json2
+import db.sqlite
 
 const storage_file = '../Server/records.json'
 const keys_file = '../Server/keys.txt'
 
-fn (s Server) write_records() ! {
-	os.write_file(storage_file, json2.encode_pretty(s.records))!
+fn (mut s Server) write_record(r Record) ! {
+	sql s.db {
+		insert r into Record
+	}!
 }
 
-fn (mut s Server) load_all() ! {
-	s.records = load_records()!
-	s.keys = load_keys()!
+fn (mut s Server) remove_record(rid string) ! {
+	sql s.db {
+		delete from Record where id == rid
+	}!
 }
 
-fn load_records() ![]Record {
-	return json2.decode[[]Record](os.read_file(storage_file)!)!
+fn (mut s Server) init() ! {
+	s.db = sqlite.connect('data.db')!
+
+	sql s.db {
+		create table Record
+		create table Key
+	}!
 }
 
-fn load_keys() ![]string {
-	return os.read_lines(keys_file)!
+fn (mut s Server) records() []Record {
+	return sql s.db {
+		select from Record
+	} or { []Record{} }
 }
