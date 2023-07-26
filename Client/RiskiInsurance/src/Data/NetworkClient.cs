@@ -15,7 +15,10 @@ public static class NetworkClient
 	public static bool Online = false;
 	static List<ClientRecord> RecordsQueue = new();
 
-
+	/// <summary>
+	/// Returns a boolean representing whether the server is online and can be connected to
+	/// </summary>
+	/// <returns></returns>
 	private static async Task<bool> IsConnected()
 	{
 			HttpResponseMessage res = await NetworkClient.GetMessage("testConnection");
