@@ -14,7 +14,17 @@
 				
 				<StackPanel Orientation="Horizontal" Grid.Column="1" >
 					<TextBlock Text="Filter: " FontSize="18" VerticalAlignment="Center" />
-					<ComboBox Items="" Grid.Column="1" />
+					<ComboBox Name="SortTypeComboBox" Grid.Column="1" SelectedIndex="0">
+						<ComboBoxItem Content="Date"/>
+						<ComboBoxItem Content="Total"/>
+						<ComboBoxItem Content="RiderAge"/>
+						<ComboBoxItem Content="RiderExperience"/>
+						<ComboBoxItem Content="SkiPower"/>
+						<ComboBoxItem Content="SkiSeats"/>
+						<ComboBoxItem Content="SkiPrice"/>
+						<ComboBoxItem Content="SkiAge"/>
+						<ComboBoxItem Content="Excess"/>
+					</ComboBox>
 				</StackPanel>
 			</Grid>
 			

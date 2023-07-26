@@ -13,6 +13,7 @@ public partial class RecordsList : UserControl, IPage
 	public RecordsList()
 	{
 		InitializeComponent();
+		SortTypeComboBox.SelectionChanged += new EventHandler<SelectionChangedEventArgs>(ChangeSortType);
 		LoadRecords();
 	}
 
@@ -21,6 +22,11 @@ public partial class RecordsList : UserControl, IPage
 	async void LoadRecords()
 	{
 		Records = await NetworkClient.GetRecords();
+		UpdateRecordListGUI();
+	}
+
+	void UpdateRecordListGUI()
+	{
 		RecordsListBox.Children.Clear();
 		RecordsListBox.Children.AddRange(Records.Select((record) => {
 			var item = new RecordItem(record);
@@ -29,45 +35,59 @@ public partial class RecordsList : UserControl, IPage
 		}));
 	}
 
-	AvaloniaList<ClientRecord> SortRecords(SortingMode sortType, SortingDirection sortDirection, AvaloniaList<ClientRecord> records)
+	void ChangeSortType(object senderObj, SelectionChangedEventArgs e)
+	{
+		ComboBox sender = (ComboBox)senderObj;
+		if (sender.SelectedItem == null) return;
+		string SelectedContent = ((ComboBoxItem)sender.SelectedItem).Content.ToString();
+		SortingDirection sortingDirection = SortingDirection.Ascending;
+		SortingMode sortingMode = (SortingMode)Enum.Parse(typeof(SortingMode),SelectedContent);
+
+		Records = SortRecords(sortingMode, sortingDirection, Records);
+
+        UpdateRecordListGUI();
+	}
+
+
+    AvaloniaList<ClientRecord> SortRecords(SortingMode sortType, SortingDirection sortDirection, AvaloniaList<ClientRecord> records)
 	{
 		ClientRecord[] tempArr = records.ToArray<ClientRecord>();
-		switch (sortType)
+        switch (sortType)
 		{
 			case SortingMode.Date:
-				tempArr.OrderByDescending(Record => Record.GetTimeStampDateTime());
+				tempArr = tempArr.OrderByDescending(Record => Record.GetTimeStampDateTime()).ToArray<ClientRecord>();
 				break;
 			case SortingMode.Total:
-				tempArr.OrderByDescending(Record => Record.Total);
+				tempArr = tempArr.OrderByDescending(Record => Record.Total).ToArray<ClientRecord>();
 				break;
             case SortingMode.RiderAge:
-                tempArr.OrderByDescending(Record => Record.RiderAge);
+                tempArr = tempArr.OrderByDescending(Record => Record.RiderAge).ToArray<ClientRecord>();
                 break;
             case SortingMode.RiderExperience:
-                tempArr.OrderByDescending(Record => Record.RiderExperience);
+                tempArr = tempArr.OrderByDescending(Record => Record.RiderExperience).ToArray<ClientRecord>();
                 break;
             case SortingMode.SkiPower:
-                tempArr.OrderByDescending(Record => Record.SkiPower);
+                tempArr = tempArr.OrderByDescending(Record => Record.SkiPower).ToArray<ClientRecord>();
                 break;
             case SortingMode.SkiSeats:
-                tempArr.OrderByDescending(Record => Record.SkiSeats);
+                tempArr = tempArr.OrderByDescending(Record => Record.SkiSeats).ToArray<ClientRecord>();
                 break;
             case SortingMode.SkiPrice:
-                tempArr.OrderByDescending(Record => Record.SkiPrice);
+                tempArr = tempArr.OrderByDescending(Record => Record.SkiPrice).ToArray<ClientRecord>();
                 break;
             case SortingMode.SkiAge:
-                tempArr.OrderByDescending(Record => Record.SkiAge);
+                tempArr.OrderByDescending(Record => Record.SkiAge).ToArray<ClientRecord>();
                 break;
-            case SortingMode.Excees:
-                tempArr.OrderByDescending(Record => Record.Excess);
+            case SortingMode.Excess:
+                tempArr = tempArr.OrderByDescending(Record => Record.Excess).ToArray<ClientRecord>();
                 break;
         }
 		//Array is currently in descending order, if the list should be ascending then reverse it now
-		if (sortDirection == SortingDirection.Ascending)
+        if (sortDirection == SortingDirection.Ascending)
 		{
-			tempArr.Reverse<ClientRecord>();
+			tempArr = tempArr.Reverse<ClientRecord>().ToArray<ClientRecord>();
 		}
-		return new AvaloniaList<ClientRecord>(tempArr);
+        return new AvaloniaList<ClientRecord>(tempArr);
 	}
 
     void ShowDetails(ClientRecord record)
@@ -92,7 +112,7 @@ public partial class RecordsList : UserControl, IPage
 		SkiSeats,
 		SkiPrice,
 		SkiAge,
-		Excees
+		Excess
 	}
 	
 	void BackClicked(object s, RoutedEventArgs e)
