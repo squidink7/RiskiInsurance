@@ -15,6 +15,13 @@ public static class NetworkClient
 	public static bool Online = false;
 	static List<ClientRecord> RecordsQueue = new();
 
+
+	private static async Task<bool> IsConnected()
+	{
+			HttpResponseMessage res = await NetworkClient.GetMessage("testConnection");
+			return res.IsSuccessStatusCode;
+	}
+
 	/// <summary>
 	/// Adds a record to the servers record list
 	/// </summary>
@@ -26,12 +33,15 @@ public static class NetworkClient
 		{
 			// Send failed, add to offline queue
 			RecordsQueue.Add(record);
+			// This may be the first failed request tell the rest of the app we are offline
+			Online = false;
 		}
 	}
 	
 	// TODO: make an endpoint that returns 204 to query connectivity	
 	public static async Task<bool> Sync()
 	{
+		if (!await NetworkClient.IsConnected()) return false;
 		while (RecordsQueue.Count > 0)
 		{
 			var record = RecordsQueue[0];
@@ -46,7 +56,7 @@ public static class NetworkClient
 		}
 
 		await Task.Delay(1000);
-		return false;
+		return true;
 	}
 
 	/// <summary>
