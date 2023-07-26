@@ -5,7 +5,7 @@ module.exports = {
     handler: function(req, res) {
         let {ID} = req.query
         records = records.filter(record => record.ID !== ID);
-        fs.writeFileSync('../Server/records.json', JSON.stringify(records));
+        fs.writeFileSync('records.json', JSON.stringify(records));
         res.send('Record deleted!');
     }
 };

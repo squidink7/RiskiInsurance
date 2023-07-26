@@ -3,6 +3,6 @@ module.exports = {
     method: 'GET',
     path: '/records',
     handler: function(req, res) {
-        res.send(fs.readFileSync('../Server/records.json'));
+        res.send(fs.readFileSync('records.json'));
     }
 };

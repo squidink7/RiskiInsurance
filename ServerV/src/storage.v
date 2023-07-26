@@ -1,8 +1,5 @@
 import db.sqlite
 
-const storage_file = '../Server/records.json'
-const keys_file = '../Server/keys.txt'
-
 fn (mut s Server) write_record(r Record) ! {
 	sql s.db {
 		insert r into Record
