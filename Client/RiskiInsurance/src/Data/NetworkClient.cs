@@ -41,7 +41,10 @@ public static class NetworkClient
 		}
 	}
 	
-	// TODO: make an endpoint that returns 204 to query connectivity	
+	/// <summary>
+	/// Sync Records list with the server is there are unsent records
+	/// </summary>
+	/// <returns></returns>
 	public static async Task<bool> Sync()
 	{
 		if (!await NetworkClient.IsConnected()) return false;
@@ -116,29 +119,6 @@ public static class NetworkClient
 				case "POST":
 					res = await client.PostAsync($"{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
 					break;
-				case "DELETE":
-					res = await client.DeleteAsync($"{ServerAddress}:{ServerPort}/{endpoint}");
-					break;
-			}
-			// Check if success
-			return res.IsSuccessStatusCode;
-		}
-		catch (HttpRequestException)
-		{
-			return false;
-		}
-	}
-
-	private async static Task<bool> SendMessage(string endpoint, string method)
-	{
-		var client = new HttpClient();
-		try
-		{
-			HttpResponseMessage res = new HttpResponseMessage();
-			switch (method)
-			{
-				case "POST":
-					throw new NotImplementedException("Cannot POST to server without content");
 				case "DELETE":
 					res = await client.DeleteAsync($"{ServerAddress}:{ServerPort}/{endpoint}");
 					break;
