@@ -63,7 +63,7 @@ public partial class AppView : UserControl
 			}
 		}
 
-		AddPageTask.SetResult();
+		AddPageTask.TrySetResult();
 	}
 
 	async void DetectNetwork()
