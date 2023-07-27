@@ -21,8 +21,12 @@ public static class NetworkClient
 
 		if (ServerAddress == "")
 		{
+#if DEBUG
+			ServerAddress = "localhost";
+#else
 			// ServerAddress = "167.86.127.188";
 			ServerAddress = "riski.fryer.net.au"; // Use Josh's server by default (you're welcome)
+#endif
 		}
 	}
 
@@ -32,8 +36,8 @@ public static class NetworkClient
 	/// <returns></returns>
 	private static async Task<bool> IsConnected()
 	{
-			HttpResponseMessage res = await NetworkClient.GetMessage("testConnection");
-			return res.IsSuccessStatusCode;
+		HttpResponseMessage res = await NetworkClient.GetMessage("testConnection");
+		return res.IsSuccessStatusCode;
 	}
 
 	/// <summary>
@@ -158,7 +162,7 @@ public static class NetworkClient
 		}
 		catch
 		{
-			return new HttpResponseMessage();
+			return new HttpResponseMessage() { StatusCode = System.Net.HttpStatusCode.RequestTimeout};
 		}
 	}
 } 

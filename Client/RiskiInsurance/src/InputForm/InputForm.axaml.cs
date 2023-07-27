@@ -7,7 +7,7 @@ namespace RiskiInsurance;
 
 public partial class InputForm : UserControl, IPage
 {
-	public ClientRecord CurrentRecord;
+	public ClientRecord CurrentRecord = new();
 
 	bool Loading = false;
 	

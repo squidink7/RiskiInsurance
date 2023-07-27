@@ -21,8 +21,10 @@ public struct ClientRecord
 
     public ClientRecord()
 	{
-		if (ID == "")
+		if (String.IsNullOrEmpty(ID))
+		{
 			ID = Guid.NewGuid().ToString();
+		}
 		TimeStampUnix = DateTimeToUnix(DateTime.UtcNow);
     }
 

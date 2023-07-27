@@ -6,7 +6,6 @@ module.exports = {
     path: '/addRecord',
     handler: function(req, res) {
         let record = JSON.parse(req.body);
-
         //First Check if record already exists
         let sql = `SELECT 1 FROM ClientRecords WHERE ID = "${record.ID}";`
         con.query(sql, function(err, result) {
@@ -15,18 +14,18 @@ module.exports = {
                 sql = `
                     UPDATE ClientRecords
                     SET
-                        TimeStampUnix = ${record.TimeStampUnix},
-                        RiderName = ${record.RiderName},
-                        RiderAge = ${record.RiderAge},
-                        RiderExperience = ${record.RiderExperience},
-                        SkiPower = ${record.SkiPower},
-                        SkiSeats = ${record.SkiSeats},
-                        SkiPrice = ${record.SkiPrice},
-                        SkiAge = ${record.SkiAge},
-                        Excess = ${record.Excess},
-                        Total = ${record.Total}
+                        TimeStampUnix = "${record.TimeStampUnix}",
+                        RiderName = "${record.RiderName}",
+                        RiderAge = "${record.RiderAge}",
+                        RiderExperience = "${record.RiderExperience}",
+                        SkiPower = "${record.SkiPower}",
+                        SkiSeats = "${record.SkiSeats}",
+                        SkiPrice = "${record.SkiPrice}",
+                        SkiAge = "${record.SkiAge}",
+                        Excess = "${record.Excess}",
+                        Total = "${record.Total}"
                     WHERE
-                        ID = ${record.ID};
+                        ID = "${record.ID}";
                 `
             }else{
                 //Record Does Not Exist, Create it
@@ -61,6 +60,7 @@ module.exports = {
                     );
                 `
             }
+            console.log(sql);
             con.query(sql, function(err, result) {
                 res.send('Record added!');
             });
