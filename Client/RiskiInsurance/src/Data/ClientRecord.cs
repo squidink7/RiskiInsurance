@@ -33,11 +33,13 @@ public struct ClientRecord
 		// Insurance total algorithm
 		// SUPER SECRET, DO NOT STEAL
 
+		// MAKE SURE TO CLAMP VARIABLES TO THERE RESPECTIVE MIN AND MAXES
+
 		// The basic ‘starter’ quote should be $30
 		decimal price = 30;
 		// This value should be multiplied by 10 minus the number of years’ experience the rider has (e.g. 2 years’
 		// experience, the multiplier would be 10 - 2 = 8.)
-		price *= 10 - RiderExperience;
+		price *= 10 - Math.Clamp(RiderExperience,(byte)0,(byte)5);
 
 		// If the Jet Ski has 2 seats, add $75 to the quote, for 3 seats, add $90. (No extra for 1 seat)
 		if (SkiSeats == 2) { price += 75; }
