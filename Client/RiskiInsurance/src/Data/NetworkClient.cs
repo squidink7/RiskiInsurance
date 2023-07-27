@@ -9,13 +9,8 @@ namespace RiskiInsurance;
 
 public static class NetworkClient
 {
-#if DEBUG
 	static string ServerAddress = "localhost";
 	const int ServerPort = 6969;
-#else
-	static string ServerAddress = "";
-	const int ServerPort = 6969;
-#endif
 
     public static bool Online = false;
 	static List<ClientRecord> RecordsQueue = new();
@@ -77,7 +72,7 @@ public static class NetworkClient
 			}
 		}
 
-		await Task.Delay(1000);
+		NetworkClient.Online = true;
 		return true;
 	}
 
