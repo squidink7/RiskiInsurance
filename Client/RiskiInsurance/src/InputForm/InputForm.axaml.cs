@@ -71,6 +71,7 @@ public partial class InputForm : UserControl, IPage
 
 	void ClearInput()
 	{
+		Loading = true;
 		RiderNameBox.Text = "";
 		RiderAgeBox.Value = RiderAgeBox.Minimum;
 		RiderExperienceBox.Value = RiderExperienceBox.Minimum;
@@ -79,7 +80,7 @@ public partial class InputForm : UserControl, IPage
 		SkiPriceBox.Value = SkiPriceBox.Minimum;
 		SkiSeatsBox.Value = SkiSeatsBox.Minimum;
 		ExcessBox.SelectedIndex = 0;
-
+		Loading = false;
 		CalculateTotal();
 	}
 
