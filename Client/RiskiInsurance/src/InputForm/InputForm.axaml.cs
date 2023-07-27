@@ -56,6 +56,7 @@ public partial class InputForm : UserControl, IPage
 		IsEnabled = false;
 		await NetworkClient.AddRecord(CurrentRecord);
 		IsEnabled = true;
+		ClearInput();
 	}
 
 	void BackClicked(object s, RoutedEventArgs e)
