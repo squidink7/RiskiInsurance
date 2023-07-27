@@ -2,9 +2,22 @@
 
 Insurance quote calculator for Riski Jet-Ski Insurance
 
+
 ## Live Demo
 
 https://riski.fryer.net.au/
+
+## Dependencies
+
+[MariaDB](https://mariadb.org/): used for database on server
+
+[Nodejs](https://nodejs.org/en): used for running either ServerJS & ServerJSSQL
+
+[Dotnet](https://dotnet.microsoft.com/en-us/): used for building the client
+
+## Server database setup
+On the same machine that the server script will be running run the SetupDB.sh file
+
 
 ### Building
 
@@ -23,7 +36,7 @@ dotnet run
 dotnet publish -c Release
 ```
 
-### ServerJS
+### ServerJS & ServerJSSQL
 
 **Run:**
 ```
