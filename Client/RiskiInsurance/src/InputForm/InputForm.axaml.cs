@@ -8,6 +8,8 @@ namespace RiskiInsurance;
 public partial class InputForm : UserControl, IPage
 {
 	public ClientRecord CurrentRecord;
+
+	bool Loading = false;
 	
 	public InputForm()
 	{
@@ -16,14 +18,44 @@ public partial class InputForm : UserControl, IPage
 		ClearInput();
 	}
 
+	public InputForm(ClientRecord record)
+	{
+		CurrentRecord = record;
+
+		InitializeComponent();
+
+		Loading = true;
+
+		RiderNameBox.Text = CurrentRecord.RiderName;
+		RiderAgeBox.Value = CurrentRecord.RiderAge;
+		RiderExperienceBox.Value = CurrentRecord.RiderExperience;
+		SkiAgeBox.Value = CurrentRecord.SkiAge;
+		SkiPowerBox.Value = CurrentRecord.SkiPower;
+		SkiPriceBox.Value = CurrentRecord.SkiPower;
+		SkiSeatsBox.Value = CurrentRecord.SkiSeats;
+		if (CurrentRecord.Excess == 100)
+			ExcessBox.SelectedIndex = 0;
+		if (CurrentRecord.Excess == 300)
+			ExcessBox.SelectedIndex = 1;
+		if (CurrentRecord.Excess == 500)
+			ExcessBox.SelectedIndex = 2;
+
+		Loading = false;
+
+		CalculateTotal();
+	}
+
 	void TextFieldUpdated(object s, TextChangedEventArgs e) => CalculateTotal();
 	void NumberFieldUpdated(object s, NumericUpDownValueChangedEventArgs e) => CalculateTotal();
 	void ComboFieldUpdated(object s, SelectionChangedEventArgs e) => CalculateTotal();
 
 	void CalculateTotal()
 	{
+		if (Loading) return;
+
 		CurrentRecord = new ClientRecord
 		{
+			ID = CurrentRecord.ID,
 			RiderName = RiderNameBox.Text ?? "Unnamed Client",
 			RiderAge = Convert.ToByte(Math.Clamp(RiderAgeBox.Value ?? 0, 0, byte.MaxValue)),
 			RiderExperience = Convert.ToByte(Math.Clamp(RiderExperienceBox.Value ?? 0, 0, byte.MaxValue)),

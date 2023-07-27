@@ -5,7 +5,7 @@ namespace RiskiInsurance;
 
 public struct ClientRecord
 {
-	public string ID;
+	public string ID = "";
     public int TimeStampUnix;
 
 	public string RiderName = "";
@@ -21,7 +21,8 @@ public struct ClientRecord
 
     public ClientRecord()
 	{
-		ID = Guid.NewGuid().ToString();
+		if (ID == "")
+			ID = Guid.NewGuid().ToString();
 		TimeStampUnix = DateTimeToUnix(DateTime.UtcNow);
     }
 

@@ -43,6 +43,7 @@ public static class NetworkClient
 	/// <returns></returns>
 	public async static Task AddRecord(ClientRecord record)
 	{
+		Console.WriteLine(record.ID);
 		if (!await SendMessage("addRecord", "POST", record))
 		{
 			// Send failed, add to offline queue
@@ -128,10 +129,10 @@ public static class NetworkClient
 			switch (method)
 			{
 				case "POST":
-					res = await client.PostAsync($"https://{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
+					res = await client.PostAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
 					break;
 				case "DELETE":
-					res = await client.DeleteAsync($"https://{ServerAddress}:{ServerPort}/{endpoint}");
+					res = await client.DeleteAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}");
 					break;
 			}
 			// Check if success
@@ -153,7 +154,7 @@ public static class NetworkClient
 		var client = new HttpClient();
 		try
 		{
-			var res = await client.GetAsync($"https://{ServerAddress}:{ServerPort}/{endpoint}");
+			var res = await client.GetAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}");
 			return res;
 		}
 		catch

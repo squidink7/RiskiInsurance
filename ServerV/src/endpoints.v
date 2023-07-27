@@ -3,7 +3,6 @@ import x.json2
 
 ['/addRecord'; post]
 pub fn (mut s Server) add_record() vweb.Result {
-	println(s.req.data)
 	record := json2.decode[Record](s.req.data) or {
 		eprintln('Error decoding json: ${err.msg()}')
 		return s.server_error(400)

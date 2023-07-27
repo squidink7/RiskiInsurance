@@ -45,6 +45,7 @@ public partial class RecordDetails : UserControl, IPage
 
 	void EditRecord(object s, RoutedEventArgs e)
 	{
+		AppView.AddPage(new InputForm(CurrentRecord));
 		RecordUpdated?.Invoke();
 	}
 

@@ -2,6 +2,7 @@ import db.sqlite
 
 fn (mut s Server) write_record(r Record) ! {
 	sql s.db {
+		delete from Record where id == r.id
 		insert r into Record
 	}!
 }
