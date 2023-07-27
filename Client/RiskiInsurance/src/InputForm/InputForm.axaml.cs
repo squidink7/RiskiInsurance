@@ -18,6 +18,7 @@ public partial class InputForm : UserControl, IPage
 
 	void TextFieldUpdated(object s, TextChangedEventArgs e) => CalculateTotal();
 	void NumberFieldUpdated(object s, NumericUpDownValueChangedEventArgs e) => CalculateTotal();
+	void ComboFieldUpdated(object s, SelectionChangedEventArgs e) => CalculateTotal();
 
 	void CalculateTotal()
 	{
@@ -30,7 +31,7 @@ public partial class InputForm : UserControl, IPage
 			SkiPower = Convert.ToByte(Math.Clamp(SkiPowerBox.Value ?? 0, 0, byte.MaxValue)),
 			SkiPrice = Convert.ToInt32(Math.Clamp(SkiPriceBox.Value ?? 0, 0, int.MaxValue)),
 			SkiSeats = Convert.ToByte(Math.Clamp(SkiSeatsBox.Value ?? 0, 0, byte.MaxValue)),
-			Excess = Convert.ToInt16(Math.Clamp(ExcessBox.Value ?? 0, 0, short.MaxValue)),
+			Excess = Convert.ToInt16(Math.Clamp(Convert.ToInt16(((ComboBoxItem?)ExcessBox?.SelectedItem)?.Content), (short)0, short.MaxValue)),
 		};
 
 		TotalLabel.Text = CurrentRecord.CalculateTotal().ToString();
@@ -45,7 +46,7 @@ public partial class InputForm : UserControl, IPage
 		SkiPowerBox.Value = SkiPowerBox.Minimum;
 		SkiPriceBox.Value = SkiPriceBox.Minimum;
 		SkiSeatsBox.Value = SkiSeatsBox.Minimum;
-		ExcessBox.Value = ExcessBox.Minimum;
+		ExcessBox.SelectedIndex = 0;
 
 		CalculateTotal();
 	}

@@ -36,8 +36,12 @@
 				<TextBlock Text="Ski Age" Grid.Row="6" />
 				<NumericUpDown Name="SkiAgeBox" ValueChanged="NumberFieldUpdated" Minimum="0" Grid.Column="1" Grid.Row="6" />
 
-				<TextBlock Text="Excess" Grid.Row="7" />
-				<NumericUpDown Name="ExcessBox" ValueChanged="NumberFieldUpdated" Minimum="0" Grid.Column="1" Grid.Row="7" />
+				<TextBlock Text="Excess $" Grid.Row="7" />
+				<ComboBox Name="ExcessBox" SelectionChanged="ComboFieldUpdated" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Stretch" Margin="5" >
+					<ComboBoxItem Content="100" />
+					<ComboBoxItem Content="300" />
+					<ComboBoxItem Content="500" />
+				</ComboBox>
 
 			</Grid>
 		</ScrollViewer>

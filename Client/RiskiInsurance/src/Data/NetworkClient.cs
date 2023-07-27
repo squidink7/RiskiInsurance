@@ -21,8 +21,8 @@ public static class NetworkClient
 
 		if (ServerAddress == "")
 		{
-			ServerAddress = "167.86.127.188";
-			// ServerAddress = "riski.fryer.net.au"; // Use Josh's server by default (you're welcome)
+			// ServerAddress = "167.86.127.188";
+			ServerAddress = "riski.fryer.net.au"; // Use Josh's server by default (you're welcome)
 		}
 	}
 
@@ -128,10 +128,10 @@ public static class NetworkClient
 			switch (method)
 			{
 				case "POST":
-					res = await client.PostAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
+					res = await client.PostAsync($"https://{ServerAddress}:{ServerPort}/{endpoint}", new StringContent(json));
 					break;
 				case "DELETE":
-					res = await client.DeleteAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}");
+					res = await client.DeleteAsync($"https://{ServerAddress}:{ServerPort}/{endpoint}");
 					break;
 			}
 			// Check if success
@@ -153,7 +153,7 @@ public static class NetworkClient
 		var client = new HttpClient();
 		try
 		{
-			var res = await client.GetAsync($"http://{ServerAddress}:{ServerPort}/{endpoint}");
+			var res = await client.GetAsync($"https://{ServerAddress}:{ServerPort}/{endpoint}");
 			return res;
 		}
 		catch
