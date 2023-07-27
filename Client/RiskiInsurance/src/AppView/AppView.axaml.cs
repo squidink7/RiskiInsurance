@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Input;
@@ -38,6 +39,20 @@ public partial class AppView : UserControl
 		}
 	}
 
+	public static TaskCompletionSource AddPageTask = new();
+	public static async Task AddPageAsync(Control page)
+	{
+		AddPageTask = new TaskCompletionSource();
+
+		if (ViewHolder != null)
+		{
+			ViewHolder.Children.Add(page);
+			if (page is IPage ipage) ipage.Show();
+		}
+
+		await AddPageTask.Task;
+	}
+
 	public static void RemovePage()
 	{
 		if (ViewHolder != null)
@@ -47,6 +62,8 @@ public partial class AppView : UserControl
 				ViewHolder.Children.RemoveAt(ViewHolder.Children.Count - 1);
 			}
 		}
+
+		AddPageTask.SetResult();
 	}
 
 	async void DetectNetwork()

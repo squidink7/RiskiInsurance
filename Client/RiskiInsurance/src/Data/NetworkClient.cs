@@ -45,7 +45,7 @@ public static class NetworkClient
 	/// </summary>
 	/// <param name="record"></param>
 	/// <returns></returns>
-	public async static Task AddRecord(ClientRecord record)
+	public async static Task<bool> AddRecord(ClientRecord record)
 	{
 		if (!await SendMessage("addRecord", "POST", record))
 		{
@@ -53,7 +53,11 @@ public static class NetworkClient
 			RecordsQueue.Add(record);
 			// This may be the first failed request tell the rest of the app we are offline
 			Online = false;
+
+			return false;
 		}
+
+		return true;
 	}
 	
 	/// <summary>

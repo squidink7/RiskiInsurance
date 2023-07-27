@@ -86,9 +86,17 @@ public partial class InputForm : UserControl, IPage
 	async void SubmitRecord(object s, RoutedEventArgs e)
 	{
 		IsEnabled = false;
-		await NetworkClient.AddRecord(CurrentRecord);
+		var success = await NetworkClient.AddRecord(CurrentRecord);
 		IsEnabled = true;
-		ClearInput();
+		if (success)
+		{
+			ClearInput();
+		}
+		else
+		{
+			
+		}
+
 	}
 
 	void BackClicked(object s, RoutedEventArgs e)
