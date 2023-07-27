@@ -11,7 +11,7 @@ public struct ClientRecord
 	public string RiderName = "";
 	public byte RiderAge; // Clamp between 16 and 60
 	public byte RiderExperience; // Clamp between 0 and 5
-	public byte SkiPower; // Must be under 200
+	public Int16 SkiPower; // Must be under 200
 	public byte SkiSeats; // 1, 2, or 3
 	public int SkiPrice;
 	public byte SkiAge;
@@ -54,7 +54,15 @@ public struct ClientRecord
 
 		// Riski would like to add between $0 and $300 extra onto the quote, depending on the power of the Jet Ski. They
 		// would like you to suggest a way of doing this based on your analysis of the data provided.
-		// [TODO]
+		
+		// ((Chance - MinChance)/(MaxChance - MinChance))*300
+		price += (decimal)(
+			(
+				(ChanceOfCrashBecauseOfPower(SkiPower) - ChanceOfCrashBecauseOfPower(60))
+              /*--------------------------------*/ / /*-----------------------------------*/
+                  (ChanceOfCrashBecauseOfPower(310) - ChanceOfCrashBecauseOfPower(60))
+			) * 300
+			);
 
 		// Riski would like to allow a discount of up to 25% based on the age of the rider. Again, they would like you to come
 		// up with this adjustment, with reasons, based on the provided data.
@@ -68,6 +76,11 @@ public struct ClientRecord
 		Total = (int)price;
 		
 		return (int)price;
+	}
+
+	double ChanceOfCrashBecauseOfPower(Int16 Power)
+	{
+		return (double)((00.000108) * Power - 0.000599);
 	}
 
 	double AgeMultiplier(byte age)
