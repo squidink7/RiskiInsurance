@@ -43,7 +43,6 @@ public static class NetworkClient
 	/// <returns></returns>
 	public async static Task AddRecord(ClientRecord record)
 	{
-		Console.WriteLine(record.ID);
 		if (!await SendMessage("addRecord", "POST", record))
 		{
 			// Send failed, add to offline queue
