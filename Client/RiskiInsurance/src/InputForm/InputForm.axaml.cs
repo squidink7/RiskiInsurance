@@ -60,7 +60,7 @@ public partial class InputForm : UserControl, IPage
 			RiderAge = Convert.ToByte(Math.Clamp(RiderAgeBox.Value ?? 0, 0, byte.MaxValue)),
 			RiderExperience = Convert.ToByte(Math.Clamp(RiderExperienceBox.Value ?? 0, 0, byte.MaxValue)),
 			SkiAge = Convert.ToByte(Math.Clamp(SkiAgeBox.Value ?? 0, 0, byte.MaxValue)),
-			SkiPower = Convert.ToByte(Math.Clamp(SkiPowerBox.Value ?? 0, 0, byte.MaxValue)),
+			SkiPower = Convert.ToInt16(Math.Clamp(SkiPowerBox.Value ?? 0, 0, Int16.MaxValue)),
 			SkiPrice = Convert.ToInt32(Math.Clamp(SkiPriceBox.Value ?? 0, 0, int.MaxValue)),
 			SkiSeats = Convert.ToByte(Math.Clamp(SkiSeatsBox.Value ?? 0, 0, byte.MaxValue)),
 			Excess = Convert.ToInt16(Math.Clamp(Convert.ToInt16(((ComboBoxItem?)ExcessBox?.SelectedItem)?.Content), (short)0, short.MaxValue)),
