@@ -1,4 +1,0 @@
-#!/bin/bash
-
-sudo mysql --database="RiskiInsurance"
-echo "Bye SQL"

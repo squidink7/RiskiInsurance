@@ -1,6 +1,0 @@
-#!/bin/bash
-
-sudo mysql --execute="
-USE RiskiInsurance;
-SELECT * FROM ClientRecords;
-"

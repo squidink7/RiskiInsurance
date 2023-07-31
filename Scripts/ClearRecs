@@ -1,7 +1,0 @@
-#!/bin/bash
-
-sudo mysql --execute="
-USE RiskiInsurance;
-DELETE FROM ClientRecords;
-"
-echo "Table CLeared"

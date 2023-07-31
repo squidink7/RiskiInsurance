@@ -1,0 +1,60 @@
+#!/bin/bash
+
+RED="\033[1;31m"
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+arg=$1
+case "${arg,,}" in
+	"help")
+		echo -e "\n\r\n\r"
+		cat Riski.txt
+		echo -e "\n\r\n\r"
+
+	        echo -e "
+${GREEN}Riski${NC}: Open Riski DataBase
+${GREEN}recs${NC}: Display Client Records
+${YELLOW}SetupDB${NC}: Setup Database and clientRecords table
+${RED}ClearRecs${NC}: Clear all entries in the client records table
+	      	"
+	;;
+
+	"setup")
+		sudo mysql --execute="
+		CREATE DATABASE RiskiInsurance;
+
+		USE RiskiInsurance;
+
+		CREATE TABLE ClientRecords(ID varchar(255), TimeStampUnix int, RiderName varchar(255), RiderAge smallint, RiderExperience smallint, SkiPower smallint, SkiSeats smallint, SkiPrice int, SkiAge smallint, Excess int, Total int);
+
+		CREATE USER 'server'@'localhost' IDENTIFIED BY 'RiskiInsurance';
+
+		GRANT ALL PRIVILEGES ON *.* TO 'server'@'localhost' WITH GRANT OPTION;
+
+		FLUSH PRIVILEGES;
+		"
+		echo "DB set up"
+		sudo mysql --database="RiskiInsurance"
+	;;
+	
+	"records")
+		sudo mysql --execute="
+		USE RiskiInsurance;
+		SELECT * FROM ClientRecords;
+		"
+	;;
+
+	"clear")
+		sudo mysql --execute="
+		USE RiskiInsurance;
+		DELETE FROM ClientRecords;
+		"
+		echo "Table CLeared"
+	;;
+
+	"")
+		sudo mysql --database="RiskiInsurance"
+		echo -e "${GREEN}For more Riski commands use ${YELLOW}RiskiHelp${NC}"
+	;;
+esac
