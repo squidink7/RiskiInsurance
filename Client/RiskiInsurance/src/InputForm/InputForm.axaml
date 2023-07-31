@@ -19,7 +19,7 @@
 				<TextBox Name="RiderNameBox" TextChanged="TextFieldUpdated" Grid.Column="1" />
 				
 				<TextBlock Text="Rider Age" Grid.Row="1" />
-				<NumericUpDown Name="RiderAgeBox" ValueChanged="NumberFieldUpdated" Minimum="16" Grid.Column="1" Grid.Row="1" />
+				<NumericUpDown Name="RiderAgeBox" ValueChanged="NumberFieldUpdated" Minimum="16" Maximum="60" Grid.Column="1" Grid.Row="1" />
 
 				<TextBlock Text="Rider Experience" Grid.Row="2" />
 				<NumericUpDown Name="RiderExperienceBox" ValueChanged="NumberFieldUpdated" Minimum="0" Grid.Column="1" Grid.Row="2" />
@@ -28,7 +28,7 @@
 				<NumericUpDown Name="SkiPowerBox" ValueChanged="NumberFieldUpdated" Minimum="0" Grid.Column="1" Grid.Row="3" />
 				
 				<TextBlock Text="Ski Seats" Grid.Row="4" />
-				<NumericUpDown Name="SkiSeatsBox" ValueChanged="NumberFieldUpdated" Minimum="1" Grid.Column="1" Grid.Row="4" />
+				<NumericUpDown Name="SkiSeatsBox" ValueChanged="NumberFieldUpdated" Minimum="1" Maximum="3" Grid.Column="1" Grid.Row="4" />
 
 				<TextBlock Text="Ski Price" Grid.Row="5" />
 				<NumericUpDown Name="SkiPriceBox" ValueChanged="NumberFieldUpdated" Minimum="0" Grid.Column="1" Grid.Row="5" />

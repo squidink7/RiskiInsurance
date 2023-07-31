@@ -10,6 +10,8 @@ public partial class InputForm : UserControl, IPage
 	public ClientRecord CurrentRecord = new();
 
 	bool Loading = false;
+
+	public bool AutoClose = false;
 	
 	public InputForm()
 	{
@@ -91,7 +93,14 @@ public partial class InputForm : UserControl, IPage
 		IsEnabled = true;
 		if (success)
 		{
-			ClearInput();
+			if (AutoClose)
+			{
+				AppView.RemovePage();
+			}
+			else
+			{
+				ClearInput();
+			}
 		}
 		else
 		{

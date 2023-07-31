@@ -45,7 +45,7 @@ public partial class RecordDetails : UserControl, IPage
 
 	async void EditRecord(object s, RoutedEventArgs e)
 	{
-		await AppView.AddPageAsync(new InputForm(CurrentRecord));
+		await AppView.AddPageAsync(new InputForm(CurrentRecord) {AutoClose = true});
 		IsVisible = false;
 		RecordUpdated?.Invoke();
 	}
