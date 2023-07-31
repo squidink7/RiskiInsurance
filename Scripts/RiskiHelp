@@ -1,0 +1,13 @@
+#!/bin/bash
+
+GREEN="\033[1;32m"
+RED="\033[1;31m"
+YELLOW="\033[0;33m"
+NC="\033[0m"
+
+echo -e "
+${GREEN}Riski${NC}: Open Riski DataBase
+${GREEN}recs${NC}: Display Client Records
+${YELLOW}SetupDB${NC}: Setup Database and clientRecords table
+${RED}ClearRecs${NC}: Clear all entries in the client records table
+"
