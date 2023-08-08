@@ -70,7 +70,7 @@ public struct ClientRecord
 
 		// Finally, Riski would like you to apply a reasonable adjustment to the quote based on the customers selection of a
 		// $100, $300 or $500 excess.
-		price += Excess;
+		price -= (decimal)(Excess * 0.25);
 
 		price = Math.Round(price);
 		Total = (int)price;
