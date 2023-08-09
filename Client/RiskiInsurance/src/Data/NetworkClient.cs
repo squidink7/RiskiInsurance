@@ -166,7 +166,7 @@ public static class NetworkClient
 		}
 		catch
 		{
-			return new HttpResponseMessage() { StatusCode = System.Net.HttpStatusCode.RequestTimeout};
+			return new HttpResponseMessage() { StatusCode = System.Net.HttpStatusCode.RequestTimeout };
 		}
 	}
 } 
