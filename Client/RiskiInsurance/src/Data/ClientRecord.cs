@@ -67,6 +67,14 @@ public struct ClientRecord
 		// Riski would like to allow a discount of up to 25% based on the age of the rider. Again, they would like you to come
 		// up with this adjustment, with reasons, based on the provided data.
 		// [TODO]
+		if (RiderAge < 65)
+		{
+			price += price * (decimal)(0.0525* Math.Pow(Math.E, -0.0401 * RiderAge));
+		}
+		else
+		{
+			price += price * (decimal)(8.32 * Math.Pow(10,-10) * Math.Pow(Math.E, 0.235 * RiderAge);
+		}
 
 		// Finally, Riski would like you to apply a reasonable adjustment to the quote based on the customers selection of a
 		// $100, $300 or $500 excess.
